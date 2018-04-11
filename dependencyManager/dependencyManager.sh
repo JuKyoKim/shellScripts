@@ -48,9 +48,9 @@ function generateBrewPackageList(){
 	totalCount="${#arrayOfBrewPackageNames[@]}"
 	
 	# pip echo output to json file
-	touch $HOME/Desktop/brewPackage.json
-	echo "{" > $HOME/Desktop/brewPackage.json
-	echo '"brewPackages":[' >> $HOME/Desktop/brewPackage.json
+	touch $1
+	echo "{" > $1
+	echo '"brewPackages":[' >> $1
 	count=1
 	
 	# for each item in array
@@ -63,21 +63,21 @@ function generateBrewPackageList(){
 			stringToOutPut="\"$brewPackageName\""
 		fi
 
-		echo "$stringToOutPut" >> $HOME/Desktop/brewPackage.json
+		echo "$stringToOutPut" >> $1
 		let count=count+1
 	done
 	
-	echo ']' >> $HOME/Desktop/brewPackage.json
-	echo "}" >> $HOME/Desktop/brewPackage.json
-	beautifyWithJQ
+	echo ']' >> $1
+	echo "}" >> $1
+	beautifyWithJQ "$1"
 }
 
 function beautifyWithJQ(){
 	# pumping the output of OG ugly json to JQ
 	# store it in a variable
 	# print the output in to json file again
-	beautifiedJSON="$(jq '.' $HOME/Desktop/brewPackage.json)"
-	echo "$beautifiedJSON" > $HOME/Desktop/brewPackage.json
+	beautifiedJSON="$(jq '.' $1)"
+	echo "$beautifiedJSON" > "$1"
 }
 
-generateBrewPackageList
+generateBrewPackageList $HOME/Desktop/brew.json
