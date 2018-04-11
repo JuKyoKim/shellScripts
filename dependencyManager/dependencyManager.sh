@@ -62,17 +62,17 @@ function installAllBrewPackages(){
 		found=false
 		formatLineText="$(clear_quotes $line)"
 		for brewPackageName in "${ARRAY_OF_BREW_PACKAGE[@]}"; do
-			echo "checking $formatLineText vs $brewPackageName"
+			# if found dont install
 			if [[ "$formatLineText" == "$brewPackageName" ]]; then
 				found=true
 				break
 			fi
 		done
 
-		if [[ found==true ]]; then
-			echo "broke here!"
-		else
-			echo "item was never found"
+		if [[ "$found" == false ]]; then
+			echo "$formatLineText formula was not found installed in machine"
+			echo "starting brew install $formatLineText"
+			brew install $formatLineText
 		fi
 	done <<< "$(jq '.brewPackages[]' $1)"
 }
