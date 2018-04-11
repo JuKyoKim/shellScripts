@@ -1,13 +1,33 @@
 #!/bin/bash
-# bash dependency manager!
-
-# Need to make sure the update info is captured in the console for later use
-
+# ===========global variabls===========
+ARRAY_OF_BREW_PACKAGE=()
 
 
+# ===========Generic Utility===========
+
+function beautifyWithJQ(){
+	# MUST ACCEPT A PATHING
+	# pumping the output of OG ugly json to JQ
+	# store it in a variable
+	# print the output in to json file again
+	beautifiedJSON="$(jq '.' $1)"
+	echo "$beautifiedJSON" > "$1"
+}
+
+function clear_quotes(){
+	local data_type=$1
+	
+	formatted_text="${data_type%\"}"
+	formatted_text="${formatted_text#\"}"
+	# need to return a string here, so it can be bound to other variables later
+	# returns the text back
+	# function should only be used to populate variable data with a subshell?
+	echo "$formatted_text"
+}
 
 # ==========HomeBrew Management==========
 # Check to see if homebrew is installed
+
 function checkHomeBrewInstalled(){
 	# check to see if which brew outputs the correct install location
 	whichBrewOutput="$(which brew)"
@@ -20,41 +40,58 @@ function checkHomeBrewInstalled(){
 	fi
 }
 
+# pushes up brew list in to global array
+function pushUpBrewListToArray(){
+	ARRAY_OF_BREW_PACKAGE=()
+	while read line 
+	do
+		ARRAY_OF_BREW_PACKAGE+=("$line")
+	done <<< "$(brew list)"
+}
+
 # Update and upgrade all brew packages already installed
 function updateAllBrews(){
 	brew update
 	brew upgrade
 }
 
-# Install brew packages based on whatever JSON file is passed?
-# Need to create a format for the JSON file
-# pathing for the JSON file should be flexible
+# Install brew packages based on whatever JSON file is passed
 function installAllBrewPackages(){
-	echo "$1"
+	pushUpBrewListToArray
+	while read line; do
+		found=false
+		formatLineText="$(clear_quotes $line)"
+		for brewPackageName in "${ARRAY_OF_BREW_PACKAGE[@]}"; do
+			echo "checking $formatLineText vs $brewPackageName"
+			if [[ "$formatLineText" == "$brewPackageName" ]]; then
+				found=true
+				break
+			fi
+		done
 
-	# if the Brew package already exist skip it.
+		if [[ found==true ]]; then
+			echo "broke here!"
+		else
+			echo "item was never found"
+		fi
+	done <<< "$(jq '.brewPackages[]' $1)"
 }
 
-# Create a JSON file based on all the home brew packages
-# Format needs to stay the same as the JSON file thats read by the installAllBrewPackages method
-# make the JSON file live inside root? or Desktop?
+# Generates a JSON file with list of package names (json file should be beautified)
 function generateBrewPackageList(){
+	# MUST ACCEPT A PATHING AS ONE ARG
+
 	# push the brew list output in to an array
-	arrayOfBrewPackageNames=()
-	while read line 
-	do
-		arrayOfBrewPackageNames+=("$line")
-	done <<< "$(brew list)"
-	totalCount="${#arrayOfBrewPackageNames[@]}"
+	pushUpBrewListToArray
+	totalCount="${#ARRAY_OF_BREW_PACKAGE[@]}"
 	
 	# pip echo output to json file
-	touch $1
 	echo "{" > $1
 	echo '"brewPackages":[' >> $1
 	count=1
 	
 	# for each item in array
-	for brewPackageName in "${arrayOfBrewPackageNames[@]}"; do
+	for brewPackageName in "${ARRAY_OF_BREW_PACKAGE[@]}"; do
 		# if condition to not add a comma at the end
 		stringToOutPut=
 		if [[ "$count" != "$totalCount" ]]; then
@@ -72,12 +109,6 @@ function generateBrewPackageList(){
 	beautifyWithJQ "$1"
 }
 
-function beautifyWithJQ(){
-	# pumping the output of OG ugly json to JQ
-	# store it in a variable
-	# print the output in to json file again
-	beautifiedJSON="$(jq '.' $1)"
-	echo "$beautifiedJSON" > "$1"
-}
 
-generateBrewPackageList $HOME/Desktop/brew.json
+
+installAllBrewPackages $HOME/Desktop/brw.json
