@@ -14,6 +14,9 @@ function checkHomeBrewInstalled(){
 	if [[ "$whichBrewOutput" != "/usr/local/bin/brew" ]]; then
 		cd $HOME
 		/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	else
+		echo "homebrew is installed on your system already"
+		echo "Version : $(brew --version)"
 	fi
 }
 
@@ -25,14 +28,17 @@ function updateAllBrews(){
 
 # Install brew packages based on whatever JSON file is passed?
 # Need to create a format for the JSON file
+# pathing for the JSON file should be flexible
 function installAllBrewPackages(){
 	echo "$1"
 }
 
 # Create a JSON file based on all the home brew packages
 # Format needs to stay the same as the JSON file thats read by the installAllBrewPackages method
+# make the JSON file live inside root? or Desktop?
 function generateBrewPackageList(){
 	echo "$1"
+
 }
 
-echo "hello"
+checkHomeBrewInstalled
