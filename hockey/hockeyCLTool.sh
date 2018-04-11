@@ -264,12 +264,12 @@ function main (){
 
 			
 			# creates the last build downloaded.json (for debugging reasons in the near future)
-			curl -H "X-HockeyAppToken: $ACCESS_TOKEN" https://rink.hockeyapp.net/api/2/apps/"$pubID"/app_versions?include_build_urls=true | jq --arg version "$version" '[.["app_versions"][] | select(.version==$version) | {title, notes, version, "downloadLink": .build_url}]' > ~/buildToDownload.json
+			curl -H "X-HockeyAppToken: $ACCESS_TOKEN" https://rink.hockeyapp.net/api/2/apps/"$pubID"/app_versions?include_build_urls=true | jq --arg version "$version" '[.["app_versions"][] | select(.version==$version) | {title, notes, version, "downloadLink": .build_url}]' > ~/lastAppPulled.json
 			
 			buildCount=0
 			# if the second item is available display options and download based on userinput
 			# else download the first item available in the generated json
-			if [[ "$(jq '.[1] | .notes' ~/buildToDownload.json)" != null ]]; then
+			if [[ "$(jq '.[1] | .notes' ~/lastAppPulled.json)" != null ]]; then
 				clear
 				echo "=== List of builds available for download ==="
 
@@ -277,7 +277,7 @@ function main (){
 					echo "option $((buildCount++)):"
 					echo "$jsonData"
 					echo ""
-				done <<< "$(jq '.[] | .notes' ~/buildToDownload.json)"
+				done <<< "$(jq '.[] | .notes' ~/lastAppPulled.json)"
 
 				echo "=== which Build option do you choose? ==="
 				echo "=== accepted input would be 1, 2, 3, or 4.... ==="
@@ -285,14 +285,14 @@ function main (){
 				read choice
 
 				# tonumber cases the argument in to a number...... --ARG is always a string being passed......
-				download_url="$(jq --arg choice "$choice" '.[$choice | tonumber] | .downloadLink' ~/buildToDownload.json)"
+				download_url="$(jq --arg choice "$choice" '.[$choice | tonumber] | .downloadLink' ~/lastAppPulled.json)"
 				
 				# TODO need to write a regular expression that checks the notes string and pull the QA or prod name
 				# and make the app name = that instead
 				# need to move the appname space modifier to the else condition below.
 
 			else
-				download_url="$(jq '.[0] | .downloadLink' ~/buildToDownload.json)"
+				download_url="$(jq '.[0] | .downloadLink' ~/lastAppPulled.json)"
 			fi
 			
 			download_url="$(clear_quotes "$download_url")"
