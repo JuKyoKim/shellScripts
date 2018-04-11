@@ -109,6 +109,20 @@ function generateBrewPackageList(){
 	beautifyWithJQ "$1"
 }
 
+# ==========NPM + Node.js Management==========
 
+function checkNpmAndNodeIsInstalled(){
+	echo "check node is installed here"
+}
 
-installAllBrewPackages $HOME/Desktop/brw.json
+function generateNpmPackageList(){
+	echo "generate package list here"
+	# npm ls -g --depth 0
+}
+
+function updateAllNpmPackages(){
+	npm update -g .
+	npm install npm@latest -g.
+}
+
+generateBrewPackageList $HOME/Desktop/brw.json
