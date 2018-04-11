@@ -31,14 +31,53 @@ function updateAllBrews(){
 # pathing for the JSON file should be flexible
 function installAllBrewPackages(){
 	echo "$1"
+
+	# if the Brew package already exist skip it.
 }
 
 # Create a JSON file based on all the home brew packages
 # Format needs to stay the same as the JSON file thats read by the installAllBrewPackages method
 # make the JSON file live inside root? or Desktop?
 function generateBrewPackageList(){
-	echo "$1"
+	# push the brew list output in to an array
+	arrayOfBrewPackageNames=()
+	while read line 
+	do
+		arrayOfBrewPackageNames+=("$line")
+	done <<< "$(brew list)"
+	totalCount="${#arrayOfBrewPackageNames[@]}"
+	
+	# pip echo output to json file
+	touch $HOME/Desktop/brewPackage.json
+	echo "{" > $HOME/Desktop/brewPackage.json
+	echo '"brewPackages":[' >> $HOME/Desktop/brewPackage.json
+	count=1
+	
+	# for each item in array
+	for brewPackageName in "${arrayOfBrewPackageNames[@]}"; do
+		# if condition to not add a comma at the end
+		stringToOutPut=
+		if [[ "$count" != "$totalCount" ]]; then
+			stringToOutPut="\"$brewPackageName\","
+		else
+			stringToOutPut="\"$brewPackageName\""
+		fi
 
+		echo "$stringToOutPut" >> $HOME/Desktop/brewPackage.json
+		let count=count+1
+	done
+	
+	echo ']' >> $HOME/Desktop/brewPackage.json
+	echo "}" >> $HOME/Desktop/brewPackage.json
+	beautifyWithJQ
 }
 
-checkHomeBrewInstalled
+function beautifyWithJQ(){
+	# pumping the output of OG ugly json to JQ
+	# store it in a variable
+	# print the output in to json file again
+	beautifiedJSON="$(jq '.' $HOME/Desktop/brewPackage.json)"
+	echo "$beautifiedJSON" > $HOME/Desktop/brewPackage.json
+}
+
+generateBrewPackageList
