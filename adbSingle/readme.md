@@ -1,4 +1,4 @@
-# AndroidMultiCapShellScript!
+# adbSingle
 
 ## Description
 - A shell script that runs specific ADB commands on a single device when multiple android devices are connected.
