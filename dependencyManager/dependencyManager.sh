@@ -143,6 +143,8 @@ function pushUpNpmListToArray(){
 		fi
 		ARRAY_OF_NPM_PACKAGE+=("$string")
 	done <<< "$(npm ls -g --depth 0)"
+	# TODO - look in to create a basic loading bar
+	# https://stackoverflow.com/questions/12628327/how-to-show-and-update-echo-on-same-line
 	echo -n "pushing list up to temp variable..."
 }
 
