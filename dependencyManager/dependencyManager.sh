@@ -1,6 +1,7 @@
 #!/bin/bash
 # ===========global variabls===========
 ARRAY_OF_BREW_PACKAGE=()
+ARRAY_OF_NPM_PACKAGE=()
 ARRAY_OF_DEP_MANAGE=( "npm" "brew" )
 
 # ===========Generic Utility===========
@@ -57,7 +58,6 @@ function checkHomeBrewInstalled(){
 
 # pushes up brew list in to global array
 function pushUpBrewListToArray(){
-	ARRAY_OF_BREW_PACKAGE=()
 	while read line 
 	do
 		ARRAY_OF_BREW_PACKAGE+=("$line")
@@ -131,6 +131,21 @@ function generateBrewPackageList(){
 
 # ==========NPM + Node.js Management==========
 
+# pushes up the text to array, but ill crop with AWK
+function pushUpNpmListToArray(){
+	echo "Running npm list command to pull all global packages..."
+	while read line ; do
+		if [[ "$(echo "$line" | awk '{print $1}')" != "/usr/local/lib" ]]; then
+			# rip out only the part thats relevant
+			string="$(echo "$line" | awk '{print $2}')"
+			# replace the @ character with a blank space
+			string="${string/@/ }"
+		fi
+		ARRAY_OF_NPM_PACKAGE+=("$string")
+	done <<< "$(npm ls -g --depth 0)"
+	echo -n "pushing list up to temp variable..."
+}
+
 function nodeJsonOutPut(){
 	cat <<-EOF
 		{
@@ -154,39 +169,20 @@ function checkNpmAndNodeIsInstalled(){
 
 function generateNpmPackageList(){
 	# ACCEPT JSON file PATHING!
+	pushUpNpmListToArray
+
 	echo "Creating $1 file"
 	echo "{" > $1
 	echo "\"nodePackages\": [" >> $1
-	echo "Running npm list command to pull all global packages..."
-	
-	#  count was added for debugging purposes
-	count=1
 
-	JOBFINISHED=false
-	until $JOBFINISHED ; do
-		read line || JOBFINISHED=true
-		
-		# if the first item in line does not have the pathing
-		if [[ "$(echo "$line" | awk '{print $1}')" != "/usr/local/lib" ]]; then
-			string="$(echo "$line" | awk '{print $2}')"
-			
-			# replace the @ character with a blank space
-			# using awk: 
-			# - make the first word the name value
-			# - make the second word the version value
-			string="${string/@/ }"
-			npmPackageName="$(echo "$string" | awk '{print $1}')"
-			versionNum="$(echo "$string" | awk '{print $2}')"
+	for string in "${ARRAY_OF_NPM_PACKAGE[@]}" ; do
+		npmPackageName="$(echo "$string" | awk '{print $1}')"
+		versionNum="$(echo "$string" | awk '{print $2}')"
 
-			nodeJsonOutPut $npmPackageName $versionNum >> $1
+		nodeJsonOutPut $npmPackageName $versionNum >> $1
+	done
 
-			# debugging purposes
-			echo "line $count: $line"
-			let count=count+1
 
-			# IF the line read is empty then dont run the nodejsonoutput function
-		fi
-	done <<< "$(npm ls -g --depth 0)"
 
 	# wrap up the json file
 	echo "] }" >> $1
