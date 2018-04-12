@@ -84,7 +84,3 @@ adb pull {path of file you want to pull}
 
 ### Apple configurator - https://itunes.apple.com/us/app/apple-configurator-2/id1037126344?mt=12
 
-
-
-
-

@@ -1,7 +1,7 @@
 #!/bin/bash
 # ===========global variabls===========
 ARRAY_OF_BREW_PACKAGE=()
-
+ARRAY_OF_DEP_MANAGE=( "npm" "brew" )
 
 # ===========Generic Utility===========
 
@@ -23,6 +23,21 @@ function clear_quotes(){
 	# returns the text back
 	# function should only be used to populate variable data with a subshell?
 	echo "$formatted_text"
+}
+
+# Something to make my code leaner? for now im going to leave this here
+function checkDepManInstalled(){
+	# - Param 1 should accept the dependency name
+	# - Param 2 should accept the expected path it should appear
+	# Print false or true depending on if something was correctly returned?
+
+	whichDependencyOutput="$(which $1)"
+	# if the path doesn't match the second param
+	if [[ "$whichDependencyOutput" != "$2" ]]; then
+		echo false
+	else
+		echo true
+	fi
 }
 
 # ==========HomeBrew Management==========
@@ -50,7 +65,7 @@ function pushUpBrewListToArray(){
 }
 
 # Update and upgrade all brew packages already installed
-function updateAllBrews(){
+function updateAllBrewPackages(){
 	brew update
 	brew upgrade
 }
@@ -58,22 +73,27 @@ function updateAllBrews(){
 # Install brew packages based on whatever JSON file is passed
 function installAllBrewPackages(){
 	pushUpBrewListToArray
+	# while loop over the json doc thats passed
 	while read line; do
 		found=false
 		formatLineText="$(clear_quotes $line)"
+		# compare each item against whatever is pulled from brew list command
 		for brewPackageName in "${ARRAY_OF_BREW_PACKAGE[@]}"; do
-			# if found dont install
+			
+			# if formula is found set to true, and discontinue nested loop
 			if [[ "$formatLineText" == "$brewPackageName" ]]; then
 				found=true
 				break
 			fi
 		done
 
+		# if item is not found then start installing the formula
 		if [[ "$found" == false ]]; then
 			echo "$formatLineText formula was not found installed in machine"
 			echo "starting brew install $formatLineText"
 			brew install $formatLineText
 		fi
+		# piping the JSON data to avoid subshell issues
 	done <<< "$(jq '.brewPackages[]' $1)"
 }
 
@@ -111,18 +131,57 @@ function generateBrewPackageList(){
 
 # ==========NPM + Node.js Management==========
 
+function nodeJsonOutPut(){
+	cat <<-EOF
+		{
+      		"name": "$1",
+      		"version": "$2"
+    	},
+	EOF
+}
+
 function checkNpmAndNodeIsInstalled(){
-	echo "check node is installed here"
+	whichNodeOutput="$(which node)"
+	if [[ "$whichNodeOutput" != "/usr/local/bin/node" ]]; then
+		echo "node was not found. Running the install latest command"
+		cd $HOME
+		brew install node
+	fi
+
+	echo "attempting to install latest NPM version"
+	npm install npm@latest -g
 }
 
 function generateNpmPackageList(){
-	echo "generate package list here"
-	# npm ls -g --depth 0
+	# ACCEPT JSON file PATHING!
+	echo "Creating $1 file"
+	echo "{" > $1
+	echo "\"nodePackages\": [" >> $1
+
+	echo "Running npm list command to pull all global packages..."
+	while read line; do
+		if [[ "$(echo "$line" | awk '{print $1}')" != "/usr/local/lib" ]]; then
+			string="$(echo "$line" | awk '{print $2}')"
+			# replace the @ character with a blank space
+			# using awk: 
+			# - make the first word the name value
+			# - make the second word the version value
+			string="${string/@/ }"
+			npmPackageName="$(echo "$string" | awk '{print $1}')"
+			versionNum="$(echo "$string" | awk '{print $2}')"
+			nodeJsonOutPut $npmPackageName $versionNum >> $1
+
+		fi
+	done <<< "$(npm ls -g --depth 0)"
+
+	# wrap up the json file
+	echo "] }" >> $1
+
 }
 
 function updateAllNpmPackages(){
 	npm update -g .
 	npm install npm@latest -g.
 }
-
-generateBrewPackageList $HOME/Desktop/brw.json
+# "(\w*\w@*.*)"
+generateNpmPackageList $HOME/Desktop/node.json
