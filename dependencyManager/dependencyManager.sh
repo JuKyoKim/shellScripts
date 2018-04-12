@@ -136,7 +136,7 @@ function nodeJsonOutPut(){
 		{
       		"name": "$1",
       		"version": "$2"
-    	},
+    	}
 	EOF
 }
 
@@ -157,11 +157,19 @@ function generateNpmPackageList(){
 	echo "Creating $1 file"
 	echo "{" > $1
 	echo "\"nodePackages\": [" >> $1
-
 	echo "Running npm list command to pull all global packages..."
-	while read line; do
+	
+	#  count was added for debugging purposes
+	count=1
+
+	JOBFINISHED=false
+	until $JOBFINISHED ; do
+		read line || JOBFINISHED=true
+		
+		# if the first item in line does not have the pathing
 		if [[ "$(echo "$line" | awk '{print $1}')" != "/usr/local/lib" ]]; then
 			string="$(echo "$line" | awk '{print $2}')"
+			
 			# replace the @ character with a blank space
 			# using awk: 
 			# - make the first word the name value
@@ -169,14 +177,22 @@ function generateNpmPackageList(){
 			string="${string/@/ }"
 			npmPackageName="$(echo "$string" | awk '{print $1}')"
 			versionNum="$(echo "$string" | awk '{print $2}')"
+
 			nodeJsonOutPut $npmPackageName $versionNum >> $1
 
+			# debugging purposes
+			echo "line $count: $line"
+			let count=count+1
+
+			# IF the line read is empty then dont run the nodejsonoutput function
 		fi
 	done <<< "$(npm ls -g --depth 0)"
 
 	# wrap up the json file
 	echo "] }" >> $1
 
+	# beautify with JQ immediately after!
+	# beautifyWithJQ
 }
 
 function updateAllNpmPackages(){
