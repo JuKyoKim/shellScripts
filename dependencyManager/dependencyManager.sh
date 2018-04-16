@@ -11,6 +11,7 @@ function beautifyWithJQ(){
 	# pumping the output of OG ugly json to JQ
 	# store it in a variable
 	# print the output in to json file again
+	echo "beautifing JSON file $1"
 	beautifiedJSON="$(jq '.' $1)"
 	echo "$beautifiedJSON" > "$1"
 }
@@ -170,9 +171,11 @@ function checkNpmAndNodeIsInstalled(){
 }
 
 function generateNpmPackageList(){
+
 	# ACCEPT JSON file PATHING!
 	pushUpNpmListToArray
 
+	count=1
 	echo "Creating $1 file"
 	echo "{" > $1
 	echo "\"nodePackages\": [" >> $1
@@ -180,17 +183,23 @@ function generateNpmPackageList(){
 	for string in "${ARRAY_OF_NPM_PACKAGE[@]}" ; do
 		npmPackageName="$(echo "$string" | awk '{print $1}')"
 		versionNum="$(echo "$string" | awk '{print $2}')"
-
-		nodeJsonOutPut $npmPackageName $versionNum >> $1
+		
+		# IF the npmPackageName and the versionNum does not have 0 length
+		if [[ ! -z "$npmPackageName" && ! -z "$versionNum" ]]; then
+			nodeJsonOutPut $npmPackageName $versionNum >> $1
+			# if condition to add commas at the end of each item
+			if [[ "$count" != "${#ARRAY_OF_NPM_PACKAGE[@]}" ]]; then
+				echo "," >> $1
+			fi
+		fi
+		let count=count+1
 	done
-
-
 
 	# wrap up the json file
 	echo "] }" >> $1
 
 	# beautify with JQ immediately after!
-	# beautifyWithJQ
+	beautifyWithJQ $1
 }
 
 function updateAllNpmPackages(){
