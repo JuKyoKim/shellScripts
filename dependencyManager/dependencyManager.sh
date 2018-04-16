@@ -47,8 +47,9 @@ function checkDepManInstalled(){
 
 function checkHomeBrewInstalled(){
 	# check to see if which brew outputs the correct install location
-	whichBrewOutput="$(which brew)"
-	if [[ "$whichBrewOutput" != "/usr/local/bin/brew" ]]; then
+	
+	brewInstalled="$(checkDepManInstalled brew "/usr/local/bin/brew")"
+	if [[ $brewInstalled == false ]]; then
 		cd $HOME
 		/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	else
@@ -159,8 +160,8 @@ function nodeJsonOutPut(){
 }
 
 function checkNpmAndNodeIsInstalled(){
-	whichNodeOutput="$(which node)"
-	if [[ "$whichNodeOutput" != "/usr/local/bin/node" ]]; then
+	npmInstalled="$(checkDepManInstalled node "/usr/local/bin/node")"
+	if [[ $npmInstall == false ]]; then
 		echo "node was not found. Running the install latest command"
 		cd $HOME
 		brew install node
@@ -237,4 +238,12 @@ function installAllNpmPackages(){
 	done <<< "$(jq '.nodePackages[] | .name + "@" + .version' $1)"
 }
 
-installAllNpmPackages ~/Desktop/node.json
+# ========= function to run the command =========
+
+function main(){
+	checkHomeBrewInstalled
+	checkNpmAndNodeIsInstalled
+}
+
+# = start =
+main
