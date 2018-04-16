@@ -2,8 +2,9 @@
 # ===========global variabls===========
 ARRAY_OF_BREW_PACKAGE=()
 ARRAY_OF_NPM_PACKAGE=()
-ARRAY_OF_DEP_MANAGE=( "npm" "brew" )
-
+readonly PROGNAME=$(basename $0)
+readonly ARRAY_OF_DEP_MANAGE=( "npm" "brew" )
+readonly ARRAY_OF_COMMAND=("-c" "-g" "-i" "-u")
 # ===========Generic Utility===========
 
 function beautifyWithJQ(){
@@ -238,12 +239,46 @@ function installAllNpmPackages(){
 	done <<< "$(jq '.nodePackages[] | .name + "@" + .version' $1)"
 }
 
-# ========= function to run the command =========
+# ========= Generic app methods =========
+
+function usage(){
+	cat <<-EOF
+		========= Dependency Manager =========
+
+		Name
+		----
+		$PROGNAME -- Dependency Manager Shell Script
+
+		Usage
+		-----
+		$PROGNAME <command> <managerType> <JsonFilePathing>
+
+		<command> - List of all available commands => ()
+		<managerType> - List of all supported Dependency Managers =>(${ARRAY_OF_DEP_MANAGE[@]})
+		<JsonFilePathing> - Pathing Format example => (array items)
+
+		commandInfo
+		-----------
+		-c  Checks to see if dependency manager is installed
+		-g  Generates a json file containing the packages installed under whichever manager.
+		-i  Install packages under whatever JSON file was passed. IF the package is already 
+		    installed it will skip and move to the next item
+		-u  update all packages under whatever dependency manager (Its always to latest stable).
+
+		Return Codes
+		------------
+		0 => something
+		TODO - Need to add exit conditions and return codes
+
+		========= Dependency Manager =========
+	EOF
+}
 
 function main(){
-	checkHomeBrewInstalled
-	checkNpmAndNodeIsInstalled
+	usage
 }
+
+
 
 # = start =
 main
