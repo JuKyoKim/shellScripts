@@ -146,7 +146,7 @@ function pushUpNpmListToArray(){
 	done <<< "$(npm ls -g --depth 0)"
 	# TODO - look in to create a basic loading bar
 	# https://stackoverflow.com/questions/12628327/how-to-show-and-update-echo-on-same-line
-	echo -n "pushing list up to temp variable..."
+	echo "pushing list up to temp variable..."
 }
 
 function nodeJsonOutPut(){
@@ -206,5 +206,35 @@ function updateAllNpmPackages(){
 	npm update -g .
 	npm install npm@latest -g.
 }
-# "(\w*\w@*.*)"
-generateNpmPackageList $HOME/Desktop/node.json
+
+function installAllNpmPackages(){
+	pushUpNpmListToArray
+
+	# check against existing list if any of the packages are already installed
+	while read externalJsonPackages; do
+		withoutAtSign="${externalJsonPackages/@/ }"
+		# compare to make sure the external JSON stuff isnt showing up in the current list
+		found=false
+
+		for string in "${ARRAY_OF_NPM_PACKAGE[@]}" ; do
+
+			existingPackageName="$(echo "$string" | awk '{print $1}')"
+			formatString="$(echo "$withoutAtSign" | awk '{print $1}')"
+			formatString="$(clear_quotes $formatString)"
+
+			if [[ $formatString == $existingPackageName ]]; then
+				found=true
+				break
+			fi
+		done
+
+		if [[ $found == false ]]; then
+			echo "$withoutAtSign node package was not found."
+			echo "starting global install for package $externalJsonPackages"
+			npm install -g "$(clear_quotes $externalJsonPackages)"
+		fi
+
+	done <<< "$(jq '.nodePackages[] | .name + "@" + .version' $1)"
+}
+
+installAllNpmPackages ~/Desktop/node.json
