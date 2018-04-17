@@ -460,10 +460,20 @@ function main(){
 	# checks to see if -g was given correct data, based on if it was its going to generate list
 	# need to add default path logic
 	elif [[ $1 == "-g" && $managerTypeNull == "0" && $managerTypeValid == "0" ]]; then
-		if [[ $2 == "npm" ]]; then
-			generateNpmPackageList
+		# add an if condition that checks for path
+		local defaultPath=
+		if [[ $pathIncludesJson == 3 || $pathNull == 3 ]]; then
+			echo "path was not recognized!"
+			defaultPath="$HOME/Desktop/$2.json"
+			echo "setting path to default: $defaultPath"
 		else
-			generateBrewPackageList
+			defaultPath=$3
+		fi
+
+		if [[ $2 == "npm" ]]; then
+			generateNpmPackageList $defaultPath
+		else
+			generateBrewPackageList $defaultPath
 		fi
 		exit 0
 
