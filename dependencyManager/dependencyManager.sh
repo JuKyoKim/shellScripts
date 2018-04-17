@@ -151,7 +151,7 @@ function checkHomeBrewInstalled(){
 		/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	else
 		echo "homebrew is installed on your system already"
-		echo "Version : $(brew --version)"
+		echo "Version: $(brew --version)"
 	fi
 }
 
@@ -257,15 +257,26 @@ function nodeJsonOutPut(){
 }
 
 function checkNpmAndNodeIsInstalled(){
-	npmInstalled="$(checkDepManInstalled node "/usr/local/bin/node")"
-	if [[ $npmInstall == false ]]; then
+	nodeInstalled="$(checkDepManInstalled node "/usr/local/bin/node")"
+	if [[ $nodeInstall == false ]]; then
 		echo "node was not found. Running the install latest command"
 		cd $HOME
 		brew install node
+	else
+		echo "node.js is installed on your system already"
+		echo "Version: $(node -v)"
+
 	fi
 
-	echo "attempting to install latest NPM version"
-	npm install npm@latest -g
+	npmInstalled="$(checkDepManInstalled npm "/usr/local/bin/npm")"
+	if [[ $npmInstalled == false ]]; then
+		echo "npm was not found. Running the install latest NPM version"
+		cd $HOME
+		npm install npm@latest -g
+	else	
+		echo "npm is installed on your system already"
+		echo "Version: $(npm -v)"
+	fi
 }
 
 function generateNpmPackageList(){
@@ -365,17 +376,15 @@ function main(){
 	fi
 
 	# check to make sure if the C command is empty then do whatever need to modify this part
-	if [[ ($1 != "-c" && $managerTypeNull == "2") || ($1 != "-c" && $managerTypeValid == "2") ]]; then
+	if [[ $1 == "-c" && $managerTypeNull == "2" || $managerTypeValid == "2" ]]; then
+		echo "reached here"
+		checkNpmAndNodeIsInstalled
+		checkHomeBrewInstalled
+	else
 		clearCurrentTerminalSession
 		errorMessage "managerType" "$2"
 		usage
 		exit 2
-	fi
-
-	if [[ $1 == "-c" && $managerTypeNull == "2" ]]; then
-		echo "reached here"
-		checkNpmAndNodeIsInstalled
-		checkHomeBrewInstalled
 	fi
 
 }
