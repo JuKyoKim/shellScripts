@@ -254,16 +254,19 @@ function usage(){
 		-----
 		$PROGNAME <command> <managerType> <JsonFilePathing>
 
-		<command> - List of all available commands => ()
+		<command> - List of all available commands => (${ARRAY_OF_COMMAND[@]})
 		<managerType> - List of all supported Dependency Managers =>(${ARRAY_OF_DEP_MANAGE[@]})
-		<JsonFilePathing> - Pathing Format example => (array items)
+		<JsonFilePathing> - This is an optional field!
+		                  - IF specified the pathing should contain '.json' at the end
+		                  - IF the pathing doesn't get specified it will default to desktop with generic name!
+		                  - IF the pathing is wrong (doesn't contain .json) it will default to desktop with generic name!
 
 		COMMAND INFO
 		-----------
 		-c  Checks to see if dependency manager is installed
 		-g  Generates a json file containing the packages installed under whichever manager.
-		-i  Install packages under whatever JSON file was passed. IF the package is already 
-		    installed it will skip and move to the next item
+		-i  Install packages under whatever JSON file was passed. 
+		    IF the package is already installed it will skip and move to the next item
 		-u  update all packages under whatever dependency manager (Its always to latest stable).
 
 		RETURN CODES
@@ -301,7 +304,7 @@ function validateInvalidData(){
 	# unpack the array from param to variable
 	tempArray=( "$2" )
 	matched=false
-	
+
 	# for loop through the array
 	for item in $tempArray; do
 		if [[ $1 == $item ]]; then
@@ -323,11 +326,12 @@ function validateJsonIncludedInPath(){
 	# - first item should be the item in question
 	# - second item should be the error code returned if the item doesnt contain .json
 
-	# match using regex for a .json in pathing
-	# if its not there throw the error code 3
-	# else return 0
-
-	echo "something here"
+	# - if the pathing doesnt contain .json at the end
+	if [[ $1 =~ \.json$ ]]; then
+		echo 0
+	else
+		echo $2
+	fi
 }
 
 
@@ -337,7 +341,5 @@ function main(){
 	# need to write a case where based on error returned the console prints specific messages
 }
 
-validateInvalidData "asdf" "$(echo ${ARRAY_OF_DEP_MANAGE[@]})" 2
-
 # = start =
-# main
+main
