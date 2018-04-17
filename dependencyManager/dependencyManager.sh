@@ -190,6 +190,21 @@ function errorMessage(){
 	EOF
 }
 
+function installScriptDep(){
+	# check to make sure all packages are installed before running script
+	if [[ "$(checkDepManInstalled brew "/usr/local/bin/brew")" == false ]]; then
+		checkHomeBrewInstalled
+	fi
+
+	if [[ "$(checkDepManInstalled npm "/usr/local/bin/npm")" == false ]]; then
+		checkNpmAndNodeIsInstalled
+	fi
+
+	if [[ "$(checkBrewListForSpecificPackage jq)" == false ]]; then
+		brew install jq
+	fi
+}
+
 # ==========HomeBrew Management==========
 # Check to see if homebrew is installed
 
@@ -204,6 +219,18 @@ function checkHomeBrewInstalled(){
 		echo "homebrew is installed on your system already"
 		echo "Version: $(brew --version)"
 	fi
+}
+
+function checkBrewListForSpecificPackage(){
+	while read line 
+	do
+		if [[ $line == "$1" ]]; then
+			echo true
+			exit 0
+		fi
+	done <<< "$(brew list)"
+	echo false
+	exit 1
 }
 
 # pushes up brew list in to global array
@@ -400,6 +427,8 @@ function installAllNpmPackages(){
 # ===== app start =====
 
 function main(){
+	installScriptDep
+
 	# ====== local variables ======
 	local array_of_user_input=( $1 $2 $3 )
 	local commandNull="$(validateNullData 1 $1)"
@@ -407,10 +436,7 @@ function main(){
 	local managerTypeNull="$(validateNullData 2 $2)"
 	local managerTypeValid="$(validateInvalidData $2 "$(echo ${ARRAY_OF_DEP_MANAGE[@]})" 2)"
 	local pathNull="$(validateNullData 3 $3)"
-	local pathIncludesJson="$(validateJsonIncludedInPath $3 3)"
-	
-	
-
+	local pathIncludesJson="$(validateJsonIncludedInPath $3 3)"	
 
 	# checks to make sure command is at least not null
 	if [[ $commandNull == "1" ]];then
@@ -523,5 +549,6 @@ function main(){
 
 }
 
-# = start =
+
+# ===== start =====
 main $1 $2 $3
