@@ -162,6 +162,17 @@ function validateJsonIncludedInPath(){
 	fi
 }
 
+function errorMessage(){
+	cat<<-EOF
+		$1 "$2" was not recognized!
+		please read the usage information displayed below!
+		
+
+
+
+	EOF
+}
+
 # ==========HomeBrew Management==========
 # Check to see if homebrew is installed
 
@@ -371,17 +382,6 @@ function installAllNpmPackages(){
 
 # ===== app start =====
 
-function errorMessage(){
-	cat<<-EOF
-		$1 "$2" was not recognized!
-		please read the usage information displayed below!
-		
-
-
-
-	EOF
-}
-
 function main(){
 	# ====== local variables ======
 	local array_of_user_input=( $1 $2 $3 )
@@ -389,6 +389,9 @@ function main(){
 	local commandValid="$(validateInvalidData $1 "$(echo ${ARRAY_OF_COMMAND[@]})" 1)"
 	local managerTypeNull="$(validateNullData 2 $2)"
 	local managerTypeValid="$(validateInvalidData $2 "$(echo ${ARRAY_OF_DEP_MANAGE[@]})" 2)"
+	local pathNull="$(validateNullData 3 $3)"
+	local pathIncludesJsonValid="$(validateJsonIncludedInPath $3 3)"
+
 
 	# checks to make sure command is at least not null
 	if [[ $commandNull == "1" || $commandValid == "1" ]]; then
@@ -401,27 +404,57 @@ function main(){
 	elif [[ $1 == "-c" && $managerTypeNull == "2" ]]; then
 		checkNpmAndNodeIsInstalled
 		checkHomeBrewInstalled
+		exit 0
 
 	# checks to see if the user wants to generate both list (command is valid, but the type is null)
 	elif [[ $1 == "-g" && $managerTypeNull == "2" ]]; then
 		generateNpmPackageList $HOME/Desktop/npmPackagelist.json
 		generateBrewPackageList $HOME/Desktop/brewPackageList.json
+		exit 0
+
+	# checks to see if the user wants to update both managers
+	elif [[ $1 == "-u" && $managerTypeNull == "2" ]]; then
+		updateAllNpmPackages
+		updateAllBrewPackages
+		exit 0
 
 	# checks to make sure if commadn is not C and the input is invalid OR null it throws error
 	elif [[ ($1 != "-c" && $managerTypeValid == "2") || ($1 != "-c" && $managerTypeNull == "2") ]]; then
 		clearCurrentTerminalSession
 		errorMessage "managerType" "$2"
 		usage
-		exit 1
+		exit 2
 
 	# checks to see if -g was given correct data, based on if it was its going to generate list
+	# need to add default path logic
 	elif [[ $1 == "-g" && $managerTypeNull == "0" && $managerTypeValid == "0" ]]; then
 		if [[ $2 == "npm" ]]; then
 			generateNpmPackageList
 		else
 			generateBrewPackageList
 		fi
-		
+		exit 0
+
+	# checks to see if -u command was passed, based on what was passed it will update packages
+	elif [[ $1 == "-u" && $managerTypeNull == "0" && $managerTypeValid == "0" ]]; then
+		if [[ $2 == "npm" ]]; then
+			updateAllNpmPackages
+		else
+			updateAllBrewPackages
+		fi
+		exit 0
+
+	# if the manager type is valud and the command is i
+	elif [[ $1 == "-i" && $managerTypeNull == "0" && $managerTypeValid == "0" ]]; then
+		# if the path is incorrect exit with 3
+
+		if [[ $pathNull == "3" ]]; then
+			clearCurrentTerminalSession
+			errorMessage "pathing" "$3"
+			usage
+			exit 3
+			# make an if condition where if the pathing does not find a valid json it will exit
+		fi
 	fi
 
 }
