@@ -43,6 +43,102 @@ function checkDepManInstalled(){
 	fi
 }
 
+function clearCurrentTerminalSession(){
+	osascript -e 'tell application "System Events" to tell process "Terminal" to keystroke "k" using command down'
+}
+
+function usage(){
+	cat <<-EOF
+		========= Dependency Manager =========
+
+		NAME
+		----
+		$PROGNAME -- Dependency Manager Shell Script
+
+		USAGE
+		-----
+		$PROGNAME <command> <managerType> <JsonFilePathing>
+
+		<command> - List of all available commands => (${ARRAY_OF_COMMAND[@]})
+		<managerType> - List of all supported Dependency Managers =>(${ARRAY_OF_DEP_MANAGE[@]})
+		<JsonFilePathing> - This is an optional field!
+		                  - IF specified the pathing should contain '.json' at the end
+		                  - IF the pathing doesn't get specified it will default to desktop with generic name!
+		                  - IF the pathing is wrong (doesn't contain .json) it will default to desktop with generic name!
+
+		COMMAND INFO
+		-----------
+		-c  Checks to see if dependency manager is installed
+		-g  Generates a json file containing the packages installed under whichever manager.
+		-i  Install packages under whatever JSON file was passed. 
+		    IF the package is already installed it will skip and move to the next item
+		-u  update all packages under whatever dependency manager (Its always to latest stable).
+
+		RETURN CODES
+		------------
+		0 => script ran successfully with valid data
+		1 => command given was null, invalid, or unrecognized
+		2 => managerType was null, invalid, or unrecognized
+		3 => pathing did not include '.json' at the end 
+		     (this might get auto handled with default logic)
+
+		========= Dependency Manager =========
+	EOF
+}
+
+function validateNullData(){
+	# accepts 2 items
+	# - first item is data to be checked
+	# - second item is the return code if item is not available
+	if [[ -z $1 ]]; then
+		echo $2
+	else
+		echo 0
+	fi
+}
+
+function validateInvalidData(){
+	# accepts 3 items
+	# - first item should be the item in question
+	# - second item should be an array of expected outputs
+	# -- WHEN PASSING THE SECOND ITEM IT needs to be echo-ed in
+	# - third item should be the return code returned
+
+	# EXAMPLE: validateInvalidData "npm" "$(echo ${ARRAY_OF_DEP_MANAGE[@]})" "2"
+
+	# unpack the array from param to variable
+	tempArray=( "$2" )
+	matched=false
+
+	# for loop through the array
+	for item in $tempArray; do
+		if [[ $1 == $item ]]; then
+			matched=true
+		fi
+	done
+
+	# at the end of the for loop do a conditional check IF item match return 0 else return the error code
+	if [[ $matched == true ]]; then
+		echo 0
+	else
+		echo $3
+	fi
+
+}
+
+function validateJsonIncludedInPath(){
+	# accepts 2 items
+	# - first item should be the item in question
+	# - second item should be the error code returned if the item doesnt contain .json
+
+	# - if the pathing doesnt contain .json at the end
+	if [[ $1 =~ \.json$ ]]; then
+		echo 0
+	else
+		echo $2
+	fi
+}
+
 # ==========HomeBrew Management==========
 # Check to see if homebrew is installed
 
@@ -239,107 +335,44 @@ function installAllNpmPackages(){
 	done <<< "$(jq '.nodePackages[] | .name + "@" + .version' $1)"
 }
 
-# ========= Generic app methods =========
+# ===== app start =====
 
-# need to update with correct error codes made + with how the commands work
-function usage(){
-	cat <<-EOF
-		========= Dependency Manager =========
+function errorMessage(){
+	cat<<-EOF
+		$1 "$2" was not recognized!
+		please read the usage information displayed below!
+		
 
-		NAME
-		----
-		$PROGNAME -- Dependency Manager Shell Script
 
-		USAGE
-		-----
-		$PROGNAME <command> <managerType> <JsonFilePathing>
 
-		<command> - List of all available commands => (${ARRAY_OF_COMMAND[@]})
-		<managerType> - List of all supported Dependency Managers =>(${ARRAY_OF_DEP_MANAGE[@]})
-		<JsonFilePathing> - This is an optional field!
-		                  - IF specified the pathing should contain '.json' at the end
-		                  - IF the pathing doesn't get specified it will default to desktop with generic name!
-		                  - IF the pathing is wrong (doesn't contain .json) it will default to desktop with generic name!
-
-		COMMAND INFO
-		-----------
-		-c  Checks to see if dependency manager is installed
-		-g  Generates a json file containing the packages installed under whichever manager.
-		-i  Install packages under whatever JSON file was passed. 
-		    IF the package is already installed it will skip and move to the next item
-		-u  update all packages under whatever dependency manager (Its always to latest stable).
-
-		RETURN CODES
-		------------
-		0 => script ran successfully with valid data
-		1 => command given was null, invalid, or unrecognized
-		2 => managerType was null, invalid, or unrecognized
-		3 => pathing did not include '.json' at the end 
-		     (this might get auto handled with default logic)
-
-		========= Dependency Manager =========
 	EOF
 }
 
-function validateNullData(){
-	# accepts 2 items
-	# - first item is data to be checked
-	# - second item is the return code if item is not available
-	if [[ -z $1 ]]; then
-		echo $2
-	else
-		echo 0
-	fi
-}
-
-function validateInvalidData(){
-	# accepts 3 items
-	# - first item should be the item in question
-	# - second item should be an array of expected outputs
-	# -- WHEN PASSING THE SECOND ITEM IT needs to be echo-ed in
-	# - third item should be the return code returned
-
-	# EXAMPLE: validateInvalidData "npm" "$(echo ${ARRAY_OF_DEP_MANAGE[@]})" "2"
-
-	# unpack the array from param to variable
-	tempArray=( "$2" )
-	matched=false
-
-	# for loop through the array
-	for item in $tempArray; do
-		if [[ $1 == $item ]]; then
-			matched=true
-		fi
-	done
-
-	# at the end of the for loop do a conditional check IF item match return 0 else return the error code
-	if [[ $matched == true ]]; then
-		echo 0
-	else
-		echo $3
-	fi
-
-}
-
-function validateJsonIncludedInPath(){
-	# accepts 2 items
-	# - first item should be the item in question
-	# - second item should be the error code returned if the item doesnt contain .json
-
-	# - if the pathing doesnt contain .json at the end
-	if [[ $1 =~ \.json$ ]]; then
-		echo 0
-	else
-		echo $2
-	fi
-}
-
-
 function main(){
-	usage
+	# ====== local variables ======
+	local array_of_user_input=( $1 $2 $3 )
+	local commandNull="$(validateNullData $1 1)"
+	local commandValid="$(validateInvalidData $1 "$(echo ${ARRAY_OF_COMMAND[@]})" 1)"
+	local managerTypeNull="$(validateNullData $2 2)"
+	local managerTypeValid="$(validateInvalidData $2 "$(echo ${ARRAY_OF_DEP_MANAGE[@]})" 2)"
 
-	# need to write a case where based on error returned the console prints specific messages
+	# checks to make sure command is at least not null
+	if [[ $commandNull == "1" || $commandValid == "1" ]]; then
+		clearCurrentTerminalSession
+		errorMessage "command" "$1"
+		usage
+		exit 1
+	fi
+
+	# check to make sure if the C command is empty then do whatever
+	if [[ ($1 == "-c" && $managerTypeNull == "2") || ($1 == "-c" && $managerTypeValid == "2") ]]; then
+		clearCurrentTerminalSession
+		errorMessage "managerType" "$2"
+		usage
+		exit 2
+	fi
+
 }
 
 # = start =
-main
+main $1 $2 $3
