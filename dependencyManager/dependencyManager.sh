@@ -364,12 +364,18 @@ function main(){
 		exit 1
 	fi
 
-	# check to make sure if the C command is empty then do whatever
-	if [[ ($1 == "-c" && $managerTypeNull == "2") || ($1 == "-c" && $managerTypeValid == "2") ]]; then
+	# check to make sure if the C command is empty then do whatever need to modify this part
+	if [[ ($1 != "-c" && $managerTypeNull == "2") || ($1 != "-c" && $managerTypeValid == "2") ]]; then
 		clearCurrentTerminalSession
 		errorMessage "managerType" "$2"
 		usage
 		exit 2
+	fi
+
+	if [[ $1 == "-c" && $managerTypeNull == "2" ]]; then
+		echo "reached here"
+		checkNpmAndNodeIsInstalled
+		checkHomeBrewInstalled
 	fi
 
 }

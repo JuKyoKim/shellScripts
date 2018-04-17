@@ -6,6 +6,12 @@ List of command line tools I use for everyday functions. The document also conta
 2. wrap up rest of the commands
 3. link to shell scripts i use (by the time this is done ill have the universal installer written out)
 4. https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet cheat sheet for MD cause im lazy
+5. Need to add this one specific function to some of my output shell scripts
+```bash
+function clearCurrentTerminalSession(){
+	osascript -e 'tell application "System Events" to tell process "Terminal" to keystroke "k" using command down'
+}
+```
 
 ---
 
