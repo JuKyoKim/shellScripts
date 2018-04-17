@@ -60,19 +60,40 @@ function usage(){
 		$PROGNAME <command> <managerType> <JsonFilePathing>
 
 		<command> - List of all available commands => (${ARRAY_OF_COMMAND[@]})
+		
 		<managerType> - List of all supported Dependency Managers =>(${ARRAY_OF_DEP_MANAGE[@]})
+		
 		<JsonFilePathing> - This is an optional field!
 		                  - IF specified the pathing should contain '.json' at the end
-		                  - IF the pathing doesn't get specified it will default to desktop with generic name!
-		                  - IF the pathing is wrong (doesn't contain .json) it will default to desktop with generic name!
+		                  - IF the pathing doesn't get specified it will 
+		                  default to desktop with generic name!
+		                  - IF the pathing is wrong (doesn't contain .json) 
+		                  it will default to desktop with generic name!
 
 		COMMAND INFO
 		-----------
 		-c  Checks to see if dependency manager is installed
-		-g  Generates a json file containing the packages installed under whichever manager.
-		-i  Install packages under whatever JSON file was passed. 
-		    IF the package is already installed it will skip and move to the next item
+		    * only accepts managerType (optional)
+		    * any other input will exit with code 2
+		
+		-g  Generates a json file containing the 
+		    packages installed under whichever manager.
+		    * accepts <managerType> <JsonFilePathing>
+		    * IF managerType is not specified it will default 
+		    generate json files for all depManagers
+		    * any other input will exit with code 2
+		
+		-i  Install packages under whatever JSON file was passed.
+		    * YOU MUST PASS <managerType> <JsonFilePathing> or it will throw an error
+		    * IF the package is already installed it will skip and move to the next item
+		    * Work is currently being done so it can install based on grep or find query 
+		    (off chance u only pass a directory)
+		    ** Something like "$PROGNAME -i $HOME/Desktop/JSON"
+		
 		-u  update all packages under whatever dependency manager (Its always to latest stable).
+		    * only accepts <managerType>
+		    * IF managerType is not specified it will update all depManagers
+
 
 		RETURN CODES
 		------------
@@ -88,10 +109,12 @@ function usage(){
 
 function validateNullData(){
 	# accepts 2 items
-	# - first item is data to be checked
-	# - second item is the return code if item is not available
-	if [[ -z $1 ]]; then
-		echo $2
+	# - first item is the return code if the item is null
+	# - second item is the item to be checked (this way the param is flexible)
+	#  the reversed version of this on previous commits was throwing the wrong
+	#  error code since the second item was considered the first item passed when the first param was empty
+	if [[ -z $2 ]]; then
+		echo $1
 	else
 		echo 0
 	fi
@@ -362,9 +385,9 @@ function errorMessage(){
 function main(){
 	# ====== local variables ======
 	local array_of_user_input=( $1 $2 $3 )
-	local commandNull="$(validateNullData $1 1)"
+	local commandNull="$(validateNullData 1 $1)"
 	local commandValid="$(validateInvalidData $1 "$(echo ${ARRAY_OF_COMMAND[@]})" 1)"
-	local managerTypeNull="$(validateNullData $2 2)"
+	local managerTypeNull="$(validateNullData 2 $2)"
 	local managerTypeValid="$(validateInvalidData $2 "$(echo ${ARRAY_OF_DEP_MANAGE[@]})" 2)"
 
 	# checks to make sure command is at least not null
@@ -373,18 +396,32 @@ function main(){
 		errorMessage "command" "$1"
 		usage
 		exit 1
-	fi
 
-	# check to make sure if the C command is empty then do whatever need to modify this part
-	if [[ $1 == "-c" && $managerTypeNull == "2" || $managerTypeValid == "2" ]]; then
-		echo "reached here"
+	# checks to make sure if command is C and the input is null it runs checkDep on all dependency items
+	elif [[ $1 == "-c" && $managerTypeNull == "2" ]]; then
 		checkNpmAndNodeIsInstalled
 		checkHomeBrewInstalled
-	else
+
+	# checks to see if the user wants to generate both list (command is valid, but the type is null)
+	elif [[ $1 == "-g" && $managerTypeNull == "2" ]]; then
+		generateNpmPackageList $HOME/Desktop/npmPackagelist.json
+		generateBrewPackageList $HOME/Desktop/brewPackageList.json
+
+	# checks to make sure if commadn is not C and the input is invalid OR null it throws error
+	elif [[ ($1 != "-c" && $managerTypeValid == "2") || ($1 != "-c" && $managerTypeNull == "2") ]]; then
 		clearCurrentTerminalSession
 		errorMessage "managerType" "$2"
 		usage
-		exit 2
+		exit 1
+
+	# checks to see if -g was given correct data, based on if it was its going to generate list
+	elif [[ $1 == "-g" && $managerTypeNull == "0" && $managerTypeValid == "0" ]]; then
+		if [[ $2 == "npm" ]]; then
+			generateNpmPackageList
+		else
+			generateBrewPackageList
+		fi
+		
 	fi
 
 }
