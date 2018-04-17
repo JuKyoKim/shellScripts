@@ -21,3 +21,4 @@
 ## Notes
 - you can see examples of the JSON files generated from brew and node inside this repository (in the off chance you are trying to customize your own)
 - homebrew packages will auto install/update to latest
+- need to update this readme as a toodo

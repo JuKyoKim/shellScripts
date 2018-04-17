@@ -162,9 +162,23 @@ function validateJsonIncludedInPath(){
 	fi
 }
 
+function validateJsonDataCorrectForNpm(){
+	# running this quietly with "command > /dev/null 2>&1" might not be best? Will leave alone for now
+	
+	jq '.nodePackages[] | .name + "@" + .version' -e $1 > /dev/null 2>&1
+	echo $?
+}
+
+function validateJsonDataCorrectForBrew(){
+	# running this quietly with "command > /dev/null 2>&1" might not be best? Will leave alone for now
+	
+	jq '.brewPackages[]' -e $1 > /dev/null 2>&1
+	echo $?
+}
+
 function errorMessage(){
 	cat<<-EOF
-		$1 "$2" was not recognized!
+		$1 "$2" was not recognized or was invalid!
 		please read the usage information displayed below!
 		
 
@@ -346,11 +360,11 @@ function generateNpmPackageList(){
 }
 
 function updateAllNpmPackages(){
-	npm update -g .
-	npm install npm@latest -g.
+	npm update -g
 }
 
 function installAllNpmPackages(){
+
 	pushUpNpmListToArray
 
 	# check against existing list if any of the packages are already installed
@@ -390,7 +404,9 @@ function main(){
 	local managerTypeNull="$(validateNullData 2 $2)"
 	local managerTypeValid="$(validateInvalidData $2 "$(echo ${ARRAY_OF_DEP_MANAGE[@]})" 2)"
 	local pathNull="$(validateNullData 3 $3)"
-	local pathIncludesJsonValid="$(validateJsonIncludedInPath $3 3)"
+	local pathIncludesJson="$(validateJsonIncludedInPath $3 3)"
+	
+	
 
 
 	# checks to make sure command is at least not null
@@ -399,6 +415,13 @@ function main(){
 		errorMessage "command" "$1"
 		usage
 		exit 1
+
+	elif [[ $1 == "-c" && $managerTypeNull == "0" ]]; then
+			if [[ $2 == "npm" ]]; then
+				checkNpmAndNodeIsInstalled
+			else
+				checkHomeBrewInstalled
+			fi
 
 	# checks to make sure if command is C and the input is null it runs checkDep on all dependency items
 	elif [[ $1 == "-c" && $managerTypeNull == "2" ]]; then
@@ -446,15 +469,36 @@ function main(){
 
 	# if the manager type is valud and the command is i
 	elif [[ $1 == "-i" && $managerTypeNull == "0" && $managerTypeValid == "0" ]]; then
-		# if the path is incorrect exit with 3
 
-		if [[ $pathNull == "3" ]]; then
+		# if the path is not null
+		if [[ $pathNull == 0 ]]; then
+			# set the values for the below items
+			pathContainsValidJsonForNpm="$(validateJsonDataCorrectForNpm $3)"
+			pathContainsValidJsonForBrew="$(validateJsonDataCorrectForBrew $3)"
+
+			# if the pathing is correct for whichever
+			if [[ $pathContainsValidJsonForNpm == 0 && $2 == "npm" ]]; then
+				installAllNpmPackages $3
+				exit 0
+			elif [[ $pathContainsValidJsonForBrew == 0 && $2 == "brew" ]]; then
+				#statements
+				installAllBrewPackages $3
+				exit 0
+			else
+				# if none of the above pathing matches
+				clearCurrentTerminalSession
+				errorMessage "pathing" "$3"
+				usage
+				exit 3
+			fi
+		else
 			clearCurrentTerminalSession
 			errorMessage "pathing" "$3"
 			usage
 			exit 3
-			# make an if condition where if the pathing does not find a valid json it will exit
 		fi
+	else
+		usage
 	fi
 
 }
