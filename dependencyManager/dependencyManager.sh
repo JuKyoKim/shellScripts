@@ -241,15 +241,16 @@ function installAllNpmPackages(){
 
 # ========= Generic app methods =========
 
+# need to update with correct error codes made + with how the commands work
 function usage(){
 	cat <<-EOF
 		========= Dependency Manager =========
 
-		Name
+		NAME
 		----
 		$PROGNAME -- Dependency Manager Shell Script
 
-		Usage
+		USAGE
 		-----
 		$PROGNAME <command> <managerType> <JsonFilePathing>
 
@@ -257,7 +258,7 @@ function usage(){
 		<managerType> - List of all supported Dependency Managers =>(${ARRAY_OF_DEP_MANAGE[@]})
 		<JsonFilePathing> - Pathing Format example => (array items)
 
-		commandInfo
+		COMMAND INFO
 		-----------
 		-c  Checks to see if dependency manager is installed
 		-g  Generates a json file containing the packages installed under whichever manager.
@@ -265,17 +266,60 @@ function usage(){
 		    installed it will skip and move to the next item
 		-u  update all packages under whatever dependency manager (Its always to latest stable).
 
-		Return Codes
+		RETURN CODES
 		------------
-		0 => something
-		TODO - Need to add exit conditions and return codes
+		0 => script ran successfully with valid data
+		1 => command given was null, invalid, or unrecognized
+		2 => managerType was null, invalid, or unrecognized
+		3 => pathing did not include '.json' at the end 
+		     (this might get auto handled with default logic)
 
 		========= Dependency Manager =========
 	EOF
 }
 
+function validateNullData(){
+	# accepts 2 items
+	# - first item is data to be checked
+	# - second item is the return code if item is not available
+	if [[ -z $1 ]]; then
+		echo $2
+	else
+		echo 0
+	fi
+}
+
+function validateInvalidData(){
+	# accepts 3 items
+	# - first item should be the item in question
+	# - second item should be an array of expected outputs
+	# - third item should be the return code returned
+
+	# do a for loop on the $2 array
+	# check to see if it matches any of the items specified
+	# if none of them match return error code
+	# else return 0
+
+	echo "something here!"
+}
+
+function validateJsonIncludedInPath(){
+	# accepts 2 items
+	# - first item should be the item in question
+	# - second item should be the error code returned if the item doesnt contain .json
+
+	# match using regex for a .json in pathing
+	# if its not there throw the error code 3
+	# else return 0
+
+	echo "something here"
+}
+
+
 function main(){
 	usage
+
+	# need to write a case where based on error returned the console prints specific messages
 }
 
 
