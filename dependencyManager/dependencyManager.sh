@@ -3,8 +3,9 @@
 ARRAY_OF_BREW_PACKAGE=()
 ARRAY_OF_NPM_PACKAGE=()
 readonly PROGNAME=$(basename $0)
+readonly VERSION="1.0.0"
 readonly ARRAY_OF_DEP_MANAGE=( "npm" "brew" )
-readonly ARRAY_OF_COMMAND=("-c" "-g" "-i" "-u")
+readonly ARRAY_OF_COMMAND=("-c" "-g" "-i" "-u" "-v")
 # ===========Generic Utility===========
 
 function beautifyWithJQ(){
@@ -90,9 +91,11 @@ function usage(){
 		    (off chance u only pass a directory)
 		    ** Something like "$PROGNAME -i $HOME/Desktop/JSON"
 		
-		-u  update all packages under whatever dependency manager (Its always to latest stable).
+		-u  Update all packages under whatever dependency manager (Its always to latest stable).
 		    * only accepts <managerType>
 		    * IF managerType is not specified it will update all depManagers
+
+		-v  Displays version number of the shell script!
 
 
 		RETURN CODES
@@ -412,6 +415,10 @@ function main(){
 	# checks to make sure command is at least not null
 	if [[ $commandNull == "1" ]];then
 		usage
+		exit 0
+	elif [[ $1 == "-v" ]]; then
+		echo "$PROGNAME Version: $VERSION"
+		exit 0
 	elif [[ $commandValid == "1" ]]; then
 		clearCurrentTerminalSession
 		errorMessage "command" "$1"
@@ -501,6 +508,7 @@ function main(){
 		fi
 	else
 		usage
+		exit 0
 	fi
 
 }
