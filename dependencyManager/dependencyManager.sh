@@ -410,7 +410,9 @@ function main(){
 
 
 	# checks to make sure command is at least not null
-	if [[ $commandNull == "1" || $commandValid == "1" ]]; then
+	if [[ $commandNull == "1" ]];then
+		usage
+	elif [[ $commandValid == "1" ]]; then
 		clearCurrentTerminalSession
 		errorMessage "command" "$1"
 		usage
