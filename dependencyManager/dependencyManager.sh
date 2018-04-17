@@ -293,14 +293,29 @@ function validateInvalidData(){
 	# accepts 3 items
 	# - first item should be the item in question
 	# - second item should be an array of expected outputs
+	# -- WHEN PASSING THE SECOND ITEM IT needs to be echo-ed in
 	# - third item should be the return code returned
 
-	# do a for loop on the $2 array
-	# check to see if it matches any of the items specified
-	# if none of them match return error code
-	# else return 0
+	# EXAMPLE: validateInvalidData "npm" "$(echo ${ARRAY_OF_DEP_MANAGE[@]})" "2"
 
-	echo "something here!"
+	# unpack the array from param to variable
+	tempArray=( "$2" )
+	matched=false
+	
+	# for loop through the array
+	for item in $tempArray; do
+		if [[ $1 == $item ]]; then
+			matched=true
+		fi
+	done
+
+	# at the end of the for loop do a conditional check IF item match return 0 else return the error code
+	if [[ $matched == true ]]; then
+		echo 0
+	else
+		echo $3
+	fi
+
 }
 
 function validateJsonIncludedInPath(){
@@ -322,7 +337,7 @@ function main(){
 	# need to write a case where based on error returned the console prints specific messages
 }
 
-
+validateInvalidData "asdf" "$(echo ${ARRAY_OF_DEP_MANAGE[@]})" 2
 
 # = start =
-main
+# main
