@@ -12,7 +12,7 @@ This repo has shellscripts + notes on stuff I use on my day to day life at work 
 - [Homebrew](#Homebrew)
 - [Android Platofrm Tools](#Android-Platform-tool)
 - [Apple Configurator (automation tools)](#Apple-configurator(automation tools))
-- [markdown cheatsheet](#MarkDown-cheatsheet)
+- [markdown cheatsheet](#markdown-cheatsheet)
 - [Appium](#Appium)
 
 #### My TODOs!
