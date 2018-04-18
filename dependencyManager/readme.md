@@ -38,25 +38,29 @@
 
 ## Examples on how to run the command
 - to invoke the usage information
-> ./dependencyManager.sh
-
+```bash
+./dependencyManager.sh
+```
 - to invoke the check command
-> ./dependencyManager.sh -c
-
-> ./dependencyManager.sh -c npm
-
+```bash
+./dependencyManager.sh -c
+./dependencyManager.sh -c npm
+```
 - to invoke the generate command
-> ./dependencyManager.sh -g
-
-> ./dependencyManager.sh -g npm
-
+```bash
+./dependencyManager.sh -g
+./dependencyManager.sh -g npm
+```
 - to invoke the install command
-> ./dependencyManager.sh -i npm $HOME/shellscripts/dependencyManager/nodeJsonExample.json
-
+```bash
+./dependencyManager.sh -i npm $HOME/shellscripts/dependencyManager/nodeJsonExample.json
+```
 - to invoke the update command
-> ./dependencyManager.sh -u
-
-> ./dependencyManager.sh -u npm
-
+```bash
+./dependencyManager.sh -u
+./dependencyManager.sh -u npm
+```
 - to invoke the version command
-> ./dependencyManager.sh -v
+```bash
+./dependencyManager.sh -v
+```
