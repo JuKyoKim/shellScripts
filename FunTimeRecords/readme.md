@@ -37,3 +37,9 @@ find /* -user bandit7 -size 33c -group bandit6 | xargs file | grep ASCII
 <!-- for more direct read -->
 find /* -user bandit7 -size 33c -group bandit6 | xargs cat
 ```
+
+finding a data.txt file
+value is next to the word millionth
+```shell
+find *data.txt | xargs cat | grep millionth
+```
