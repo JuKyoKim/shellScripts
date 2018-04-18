@@ -43,3 +43,9 @@ value is next to the word millionth
 ```shell
 find *data.txt | xargs cat | grep millionth
 ```
+
+sorting output
+finding unique
+```shell
+cat data.txt | sort -f | uniq -u
+```
