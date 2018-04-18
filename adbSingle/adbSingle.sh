@@ -15,11 +15,11 @@ OPTIONS=("screenshot" "screenrecord" "logcat" "displayPackages" "setIdle" "insta
 function main(){
 	# pushes all connected devices to my global array variable
 	pushDeviceIDToArray
-	clear
+	clearCurrentTerminalSession
 
 	# if theres only 1 device automatically just go to the command selection with the singular item
 	if [[ "${#DEVICEIDS[@]}" = 1 ]]; then
-		clear
+		clearCurrentTerminalSession
 		commandSelection "${DEVICEIDS[0]}"
 	else
 
@@ -42,16 +42,20 @@ function main(){
 		if [[ "$deviceIndex" > "${#DEVICEIDS[@]}" || "$deviceIndex" < 1 ]]; then
 			echo "invalid selection"; exit 1
 		else
-			clear
+			clearCurrentTerminalSession
 			commandSelection "${DEVICEIDS[$deviceIndex-1]}"
 		fi
 
 	fi
 }
 
+function clearCurrentTerminalSession(){
+	osascript -e 'tell application "System Events" to tell process "Terminal" to keystroke "k" using command down'
+}
+
 function screenShot(){
 	# pass the device ID as param1 or "$1"
-	clear
+	clearCurrentTerminalSession
 	echo "Capturing screenshot on device $1"
 	adb -s "$1" shell screencap /sdcard/Pictures/screenshot.png
 
@@ -66,7 +70,7 @@ function screenShot(){
 
 function screenRecord(){
 	#  pass the device ID as param1 or "$1"
-	clear
+	clearCurrentTerminalSession
 	# the Trap is there to catch the CTRL + C command so i can immediately chain to pull recording
 	trap 'pullRecording "$1"' 2
 	echo "Starting screenrecord on device $1"
@@ -80,7 +84,7 @@ function screenRecord(){
 
 function pullRecording(){
 	#  pass the device ID as param1 or "$1"
-	clear
+	clearCurrentTerminalSession
 	echo "Pulling the recording on device $1"
 	# sleep delay is required so the system has time to allow the MP4 to "compile"
 	sleep 1
@@ -91,7 +95,7 @@ function pullRecording(){
 }
 
 function logcat(){
-	clear
+	clearCurrentTerminalSession
 	echo "Starting adb logcat on device $1"
 	echo "Note: - When you are done recording logs you must manually kill the session."
 	echo "      - ctrl + c is the button combination!"
@@ -103,14 +107,14 @@ function logcat(){
 }
 
 function displayPackages(){
-	clear
+	clearCurrentTerminalSession
 	echo "Displaying all packages installed on device $1"
 	echo ""
 	adb -s "$1" shell pm list packages
 }
 
 function setIdle(){
-	clear
+	clearCurrentTerminalSession
 	# accept the package name as second param
 	echo "Setting idle state on APP: $2"
 	adb -s "$1" shell am set-inactive "$2" true
@@ -122,7 +126,7 @@ function setIdle(){
 
 function specifyPathForApp(){
 	# Need to accept the APPID as a first param (for the adb installation command)
-	clear
+	clearCurrentTerminalSession
 	# buffer message!
 	echo "Enter the pathing for the apk file!"
 	echo "Note:"
@@ -142,7 +146,7 @@ function specifyPathForApp(){
 function installApp(){
 	# pushes all .apk pathing from home directory to global array
 	pushAPKListToArray
-	clear
+	clearCurrentTerminalSession
 	
 	# if condition to check if the list is empty (for some odd reason it 
 	# will push up $HOME/Downloads/ by default if there are no APK files found)
@@ -179,7 +183,7 @@ function installApp(){
 			specifyPathForApp $1
 		else
 			#statements
-			clear
+			clearCurrentTerminalSession
 			echo "Installing ${APKLIST[$apkIndex-1]} to device $1"
 			adb -s "$1" install "${APKLIST[$apkIndex-1]}"
 			echo ""
@@ -258,7 +262,7 @@ function commandSelection(){
 		;;
 
 		"uninstallApp" )
-			clear
+			clearCurrentTerminalSession
 			echo "Please enter the package name of the app you want to uninstall!"
 			echo "Hint: It can be pulled from the displayPackages command!"
 			read -e -p "Package name: " packageName

@@ -201,6 +201,7 @@ function installScriptDep(){
 	fi
 
 	if [[ "$(checkBrewListForSpecificPackage jq)" == false ]]; then
+		echo "JQ formula was not found! starting install now!"
 		brew install jq
 	fi
 }
