@@ -42,10 +42,12 @@
 
 - to invoke the check command
 > ./dependencyManager.sh -c
+
 > ./dependencyManager.sh -c npm
 
 - to invoke the generate command
 > ./dependencyManager.sh -g
+
 > ./dependencyManager.sh -g npm
 
 - to invoke the install command
@@ -53,6 +55,7 @@
 
 - to invoke the update command
 > ./dependencyManager.sh -u
+
 > ./dependencyManager.sh -u npm
 
 - to invoke the version command
