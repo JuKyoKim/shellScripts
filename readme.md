@@ -9,11 +9,11 @@ This repo has shellscripts + notes on stuff I use on my day to day life at work 
 - [hockeyAppTool](/hockey)
 
 #### CLI, Tools, Tips, & Tricks (for me to ref)
-- [Homebrew](#Homebrew)
-- [Android Platofrm Tools](#Android-Platform-tool)
-- [Apple Configurator (automation tools)](#Apple-configurator(automation tools))
+- [Homebrew](#homebrew)
+- [Android Platofrm Tools](#android-platform-tool)
+- [Apple Configurator (automation tools)](#apple-configuratorautomation-tools)
 - [markdown cheatsheet](#markdown-cheatsheet)
-- [Appium](#Appium)
+- [Appium](#appium)
 
 #### My TODOs!
 
@@ -122,7 +122,6 @@ cfgutil get all
 ```
 
 ### [MarkDown cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#hr)
-Link is on the header!
 
 ### [Appium](http://appium.io/)
 
