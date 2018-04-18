@@ -8,16 +8,18 @@ This repo has shellscripts + notes on stuff I use on my day to day life at work 
 - [dependencyManager](/dependencyManager)
 - [hockeyAppTool](/hockey)
 
-#### CLI, Tools, Tips, & Tricks (for me to ref)
+#### [CLI, Tools, Tips, & Tricks (for me to ref)]()
 - [Homebrew](#homebrew)
 - [Android Platofrm Tools](#android-platform-tool)
 - [Apple Configurator (automation tools)](#apple-configuratorautomation-tools)
 - [markdown cheatsheet](#markdown-cheatsheet)
 - [Appium](#appium)
 
-#### My TODOs!
+#### [My TODOs!](#todo)
 
 ---
+
+## CLI, Tools, Tips, & Tricks!
 
 ### [Homebrew](https://brew.sh/)
 
@@ -125,8 +127,13 @@ cfgutil get all
 
 ### [Appium](http://appium.io/)
 
+---
 
-
+## TODO
+1. create bookmark points in this MD file
+2. wrap up rest of the commands
+3. link to shell scripts i use (by the time this is done ill have the universal installer written out)
+4. https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet cheat sheet for MD cause im lazy
 
 
 
