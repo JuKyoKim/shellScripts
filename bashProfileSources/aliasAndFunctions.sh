@@ -14,7 +14,7 @@ alias turn_wifi_on='networksetup -setairportpower airport on'
 
 # Generic shell command short cuts
 alias findCommandPath="type -a"
-alias deleteDownloads="rm -ri ~/Downloads/*"
+alias deleteDownloads="rm -ri $HOME/Downloads/*"
 #alias for opening another charles session
 alias charles="open -na charles"
 # to own the file (allow me to modify/execute)
@@ -30,8 +30,8 @@ alias startAndroidVirtualDevice="$HOME/Library/Android/sdk/emulator/emulator "
 # android debug bridge command shortcuts
 alias grabActivity="adb shell dumpsys window windows | grep -E 'mCurrentFocus|mFocusedApp'"
 alias screenrecord='adb shell screenrecord /sdcard/recording.mp4'
-alias pullRecording='adb pull /sdcard/recording.mp4; mv recording.mp4 ~/Desktop/; adb shell rm -rf /sdcard/recording.mp4'
-alias screenshot='adb shell screencap /sdcard/Pictures/screenshot.png; adb pull /sdcard/Pictures/screenshot.png; mv screenshot.png ~/Desktop/; adb shell rm -rf /sdcard/Pictures/screenshot.png'
+alias pullRecording='adb pull /sdcard/recording.mp4; mv recording.mp4 $HOME/Desktop/; adb shell rm -rf /sdcard/recording.mp4'
+alias screenshot='adb shell screencap /sdcard/Pictures/screenshot.png; adb pull /sdcard/Pictures/screenshot.png; mv screenshot.png $HOME/Desktop/; adb shell rm -rf /sdcard/Pictures/screenshot.png'
 # for wireless ADB connection. This should help me logcat wirelessly allowing for multiple device connections
 alias setDeviceTCPIP='adb tcpip 5555'
 
@@ -41,8 +41,8 @@ alias uninstall='adbMulti uninstall'
 alias hockey='$HOME/shellscripts/hockey/hockeyCLTool.sh'
 alias depMan="$HOME/shellscripts/dependencyManager/dependencyManager.sh"
 alias mtr="sudo mtr"
-alias adbSingle='~/shellscripts/adbSingle/adbSingle.sh'
-alias convertVideoToGif="~/shellscripts/externalScripts/videoToGif.sh"
+alias adbSingle='$HOME/shellscripts/adbSingle/adbSingle.sh'
+alias convertVideoToGif="$HOME/shellscripts/externalScripts/videoToGif.sh"
 
 # mongodb shortcuts (commentted out since im not using)
 # alias start_mongo="mongod"
