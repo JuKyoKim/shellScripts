@@ -37,6 +37,6 @@
 
 ## Things to add later on!
 - Make the screenrecord function time delayable (will most likely prompt options then accept a second argument to the screenrecord function)
-- Allow th option to run the script with arguments instead of going to text based flow
+- Allow the option to run the script with arguments instead of going to text based flow
 - Allow users to pull files if they pass a specific route/pathing for the device
 - Allow user to clear app data

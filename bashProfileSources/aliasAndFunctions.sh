@@ -73,3 +73,8 @@ complete -F autoCompHockeyCommand hockey
 function startBandit(){
 	ssh bandit$1@bandit.labs.overthewire.org -p 2220
 }
+# function to simplify git add and commits
+function git_commit_super(){
+	git add "$1"
+	git commit -m "$2"
+}
