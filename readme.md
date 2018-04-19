@@ -138,3 +138,5 @@ cfgutil get all
 2. source the test.sh file in bash_profile to make it easy to use
 3. move all references from bash_profile to a different file and just source that
 4. update this readme with any quick tips and tricks i find along the way (external shell scripts + other tools i've used in the past! Should check my stars for this information!) 
+5. need to update with initial setup shell script info
+6. need to update with all of the export list being sourced

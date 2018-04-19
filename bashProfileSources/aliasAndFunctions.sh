@@ -1,4 +1,5 @@
 #!/bin/bash
+
 #LIST OF ALIAS
 
 # for quick modification to my alias, bash profile, exports
