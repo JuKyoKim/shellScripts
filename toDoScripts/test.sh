@@ -1,3 +1,4 @@
 #!/bin/bash
-read -e -p "enter username = " testVar
-echo "$testVar"
+function testFunctionFromtest(){
+	echo $1
+}
