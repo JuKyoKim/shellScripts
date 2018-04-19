@@ -49,3 +49,30 @@ finding unique
 ```shell
 cat data.txt | sort -f | uniq -u
 ```
+
+
+string command apparently prints out printable characters
+```shell
+cat data.txt | strings | grep ==
+```
+
+base64 decode the output
+```shell
+cat data.txt | base64 --decode
+```
+
+translation or tr example
+```shell
+Gur cnffjbeq vf 5Gr8L4qetPEsPk8htqjhRK8XSP6x2RHh
+cat data.txt | tr 'a-z' 'n-za-m' | tr 'A-Z' 'N-ZA-M'
+<!-- first tr param will select range of items that gets translated -->
+<!-- second tr param defines how it gets translated -->
+
+cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'
+<!-- this also works as a solution -->
+```
+
+
+
+
+
