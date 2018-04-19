@@ -1,3 +1,4 @@
+#!/bin/bash
 #LIST OF ALIAS
 
 # for quick modification to my alias, bash profile, exports
@@ -76,5 +77,6 @@ function startBandit(){
 # function to simplify git add and commits
 function git_commit_super(){
 	git add "$1"
+	# adding esacpe character so the input isnt accepting it as multi arg
 	git commit -m "\"$2\""
 }
