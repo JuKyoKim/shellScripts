@@ -75,6 +75,7 @@ function startBandit(){
 }
 # function to simplify git add and commits
 function git_commit_super(){
+
 	git add "$1"
-	git commit -m "$2"
+	git commit -m "\"$2\""
 }
