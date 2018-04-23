@@ -46,6 +46,8 @@ alias mtr="sudo mtr"
 alias adbSingle='$HOME/shellscripts/adbSingle/adbSingle.sh'
 alias convertVideoToGif="$HOME/shellscripts/externalScripts/videoToGif.sh"
 
+alias initTest='$HOME/shellscripts/setUp/initialPullSetUp.sh'
+
 # mongodb shortcuts (commentted out since im not using)
 # alias start_mongo="mongod"
 # alias connect_mongo="mongo"
@@ -72,6 +74,8 @@ function autoCompHockeyCommand(){
 	COMPREPLY=("download" "list" "list-version")
 }
 complete -F autoCompHockeyCommand hockey
+
+# starting bandit
 function startBandit(){
 	ssh bandit$1@bandit.labs.overthewire.org -p 2220
 }
