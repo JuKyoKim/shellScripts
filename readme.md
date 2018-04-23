@@ -140,3 +140,4 @@ cfgutil get all
 4. update this readme with any quick tips and tricks i find along the way (external shell scripts + other tools i've used in the past! Should check my stars for this information!) 
 5. need to update with initial setup shell script info
 6. need to update with all of the export list being sourced
+7. need to make sure installation instructions for all shell script recommends they do this in thier home directory (at least thats where its going to be set up if the run this shit!)

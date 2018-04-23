@@ -21,8 +21,6 @@ export PATH="$PATH:/usr/local/sbin"
 # export PATH=$PATH:$MONGO_PATH/bin
 
 # Android Package Name EXPORTS
-export RIOT_LEGACY="com.bamnet.riot"
-export RIOT_CURRENT="com.riotgames.esports.mobile.Watch"
 export NHL="com.nhl.gc1112.free"
 export EURO="com.eurosport.player"
 export ESPN="com.espn.score_center"

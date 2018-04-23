@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # ========== GLOBAL VARIABLES ==========
-ARRAY_OF_PATH=()
 
 
 # write logic that setup all the source in to the bash profile
@@ -16,31 +15,36 @@ function writeToFile(){
 
 function prePopulatedProfile(){
 	# list out shit i know im going to need to set up just the shell scripts
+	# path to each shell script
 	cat<<-EOF
-
+		source $1
 	EOF
 }
 
 function changePermission(){
-	# allows users to execute the file (required for shell scripts)
-	chmod +x $1
-}
-
-function returnArrayOfPath(){
+	# list all files under shellscript directory
+	# then filter out only the shell scripts
+	# change permisson so each script is executable
 	while read line; do
-		ARRAY_OF_PATH+=("$line")
-	done <<< "$(ls -1 $1)"
+		chmod +x $line
+	done <<< "$(find $HOME/shellscripts/* | grep .sh$)"
 }
 
-function echoArrayItems(){
-	for item in "${ARRAY_OF_PATH[@]}"; do
-		echo "item $item"
-	done
+function sourceAliasAndExports(){
+	local fileToModify="$HOME/Desktop/test.sh"
+	
+	while read line; do
+		echo "writing source for $line to $fileToModify"
+		echo ""
+		writeToFile "$(prePopulatedProfile $line)" $fileToModify
+		echo ""
+	done <<< "$(find $HOME/shellscripts/bashProfileSources/* | grep .sh$)"
+	# echo "writing source to aliasAndFunctions to $fileToModify"
 }
 
 function main(){
-	returnArrayOfPath $1
-	
+	changePermission
+	sourceAliasAndExports
 }
 
 # setup flow
@@ -51,4 +55,4 @@ function main(){
 # - user is going to install all dependencies (just the basics)
 
 # start of script
-main $1
+main
