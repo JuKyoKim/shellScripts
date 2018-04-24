@@ -18,6 +18,7 @@
 - set any app to idle state
 - install app (you can either select APK in downloads or specify a path)
 - uninstall app (uninstall app you specify)
+- clear app data (package name must be specified)
 
 ## How to install the script!
 - Clone or download this script to whatever directory you want
@@ -39,4 +40,3 @@
 - Make the screenrecord function time delayable (will most likely prompt options then accept a second argument to the screenrecord function)
 - Allow the option to run the script with arguments instead of going to text based flow
 - Allow users to pull files if they pass a specific route/pathing for the device
-- Allow user to clear app data

@@ -31,7 +31,9 @@ function changePermission(){
 }
 
 function sourceAliasAndExports(){
-	local fileToModify="$HOME/Desktop/test.sh"
+	# need to check if the line exists in some form or way
+
+	local fileToModify="$HOME/.bash_profile"
 	
 	while read line; do
 		echo "writing source for $line to $fileToModify"
@@ -39,7 +41,6 @@ function sourceAliasAndExports(){
 		writeToFile "$(prePopulatedProfile $line)" $fileToModify
 		echo ""
 	done <<< "$(find $HOME/shellscripts/bashProfileSources/* | grep .sh$)"
-	# echo "writing source to aliasAndFunctions to $fileToModify"
 }
 
 function main(){
@@ -47,6 +48,16 @@ function main(){
 	sourceAliasAndExports
 }
 
+function validateSourcingIsNeeded(){
+
+	# return 0 if its not needed, if it is then return 1
+	# need to read the bashrc and the bash_profile to see if the thing exist
+	# Check the bashrc and the bashprofile
+	# or just use egrep?
+	for line in "$(cat )"; do
+		#statements
+	done
+}
 # setup flow
 # - Pull or clone the repo
 # - user is going to change permission on this shell file

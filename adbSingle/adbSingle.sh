@@ -10,7 +10,7 @@
 # Global Variables listed here!
 DEVICEIDS=()
 APKLIST=()
-OPTIONS=("screenshot" "screenrecord" "logcat" "displayPackages" "setIdle" "installApp" "uninstallApp")
+OPTIONS=("screenshot" "screenrecord" "logcat" "displayPackages" "setIdle" "installApp" "uninstallApp" "clearAppData")
 
 function main(){
 	# pushes all connected devices to my global array variable
@@ -111,6 +111,14 @@ function displayPackages(){
 	echo "Displaying all packages installed on device $1"
 	echo ""
 	adb -s "$1" shell pm list packages
+}
+
+function clearAppData(){
+	clearCurrentTerminalSession
+	# accept the package name as a second param
+	echo "Clearing all $2 data"
+	adb -s "$1" shell pm clear "$2"
+	echo "App data cleared!"
 }
 
 function setIdle(){
@@ -267,6 +275,14 @@ function commandSelection(){
 			echo "Hint: It can be pulled from the displayPackages command!"
 			read -e -p "Package name: " packageName
 			adb -s "$1" uninstall "$packageName"
+		;;
+
+		"clearAppData" )
+			clearCurrentTerminalSession
+			echo "Please enter the package name of the app data you want to clear"
+			echo "Hint: It can be pulled from the displayPackages command or in APP data in system settings"
+			read -e -p "Package name: " packageName
+			clearAppData "$1" "$packageName"
 		;;
 
 		* )
