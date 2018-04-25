@@ -46,7 +46,10 @@ function sourceAliasAndExports(){
 function main(){
 	changePermission
 	sourceAliasAndExports
+	read -e testVar
+	echo $testVar
 }
+
 
 function validateSourcingIsNeeded(){
 
@@ -54,9 +57,10 @@ function validateSourcingIsNeeded(){
 	# need to read the bashrc and the bash_profile to see if the thing exist
 	# Check the bashrc and the bashprofile
 	# or just use egrep?
-	for line in "$(cat )"; do
-		#statements
-	done
+	# for line in "$(cat )"; do
+	# 	#statements
+	# done
+	echo "helllp"
 }
 # setup flow
 # - Pull or clone the repo
@@ -66,4 +70,5 @@ function validateSourcingIsNeeded(){
 # - user is going to install all dependencies (just the basics)
 
 # start of script
+complete -F autoCompCommands ./initialPullSetUp.sh
 main
