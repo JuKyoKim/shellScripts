@@ -33,7 +33,7 @@ function changePermission(){
 function sourceAliasAndExports(){
 	# need to check if the line exists in some form or way
 
-	local fileToModify="$HOME/Desktop/test.sh"
+	local fileToModify="$HOME/.bash_profile"
 	
 	while read line; do
 		echo "writing source for $line to $fileToModify"
@@ -47,10 +47,13 @@ function sourceAliasAndExports(){
 function main(){
 	changePermission
 	
-	trap 'sourceAliasAndExports' 2
+	# this needs to be modified
+	# catches exit 113 from validateSource method
+	# it should be the ONLY method to exit with 113
+	trap 'sourceAliasAndExports' 8
 	validateSourcingIsNeeded
 
-
+	echo "restart terminal session SetUp Complete"
 }
 
 
@@ -72,13 +75,13 @@ function validateSourcingIsNeeded(){
 	# starts with "source" | whitespace | nonwhitespace * | .sh at the end 
 	done <<< "$(ls -a -1 $HOME | egrep '\.bash+_[a-z]*.e$|.bashrc')"
 	
-	# return conditions
-	# IF BOTH RC AND PROFILE DOES NOT HAVE SOURCE return 2
+	# exit conditions
+	# IF BOTH RC AND PROFILE DOES NOT HAVE SOURCE return 8
 	# IF ONE of them does have it return 0
 	if [[ ${arrayOfSourceFound[0]} || ${arrayOfSourceFound[1]} ]]; then
 		exit 0
 	else
-		exit 2
+		exit 8
 	fi
 }
 
