@@ -4,5 +4,5 @@
 #MTR
 mtr
 
-#Removing the external scripts since those are not mine?
+#Remove external Scripts! (this directory lives in my work env)
 /externalScripts

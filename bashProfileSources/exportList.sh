@@ -14,7 +14,8 @@ export PATH="$PATH:$ANDROID_HOME/tools/bin/"
 export PATH="$PATH:$ANDROID_HOME/platform-tools/"
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 export PATH="$PATH:/usr/local/sbin"
-
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
 # MongoDB EXPORTS 
 # Currently commentted out since im not using it
 # export MONGO_PATH=/usr/local/mongodb

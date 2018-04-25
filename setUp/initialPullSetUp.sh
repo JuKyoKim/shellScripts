@@ -33,35 +33,55 @@ function changePermission(){
 function sourceAliasAndExports(){
 	# need to check if the line exists in some form or way
 
-	local fileToModify="$HOME/.bash_profile"
+	local fileToModify="$HOME/Desktop/test.sh"
 	
 	while read line; do
 		echo "writing source for $line to $fileToModify"
 		echo ""
 		writeToFile "$(prePopulatedProfile $line)" $fileToModify
 		echo ""
+	# writing all sources from this specific pathing
 	done <<< "$(find $HOME/shellscripts/bashProfileSources/* | grep .sh$)"
 }
 
 function main(){
 	changePermission
-	sourceAliasAndExports
-	read -e testVar
-	echo $testVar
+	
+	trap 'sourceAliasAndExports' 2
+	validateSourcingIsNeeded
+
+
 }
 
 
 function validateSourcingIsNeeded(){
+	# booleans that will set the return condition
+	local arrayOfSourceFound=()
 
-	# return 0 if its not needed, if it is then return 1
-	# need to read the bashrc and the bash_profile to see if the thing exist
-	# Check the bashrc and the bashprofile
-	# or just use egrep?
-	# for line in "$(cat )"; do
-	# 	#statements
-	# done
-	echo "helllp"
+	while read lsLine ; do
+		# starts with text source | whitespace | anycharacter * | text export found somewhere in the middle | anycharacter * | ends with .sh
+		# starts with text source | whitespace | anycharacter * | text alias found somewhere in the middle | anycharacter * | ends with .sh
+		if [[ -z "$(egrep '^(source)\s\S*(export)\S*(.sh)$|^(source)\s.*(alias)\S*(.sh)$' $lsLine)" ]]; then
+			# filter returned nothing
+			arrayOfSourceFound+=(false)
+		else
+			# filter returned something
+			arrayOfSourceFound+=(true)
+		fi
+	# egrep-ing the output of LS to look for profile OR rc file. grep -e can replace egrep if needed?
+	# starts with "source" | whitespace | nonwhitespace * | .sh at the end 
+	done <<< "$(ls -a -1 $HOME | egrep '\.bash+_[a-z]*.e$|.bashrc')"
+	
+	# return conditions
+	# IF BOTH RC AND PROFILE DOES NOT HAVE SOURCE return 2
+	# IF ONE of them does have it return 0
+	if [[ ${arrayOfSourceFound[0]} || ${arrayOfSourceFound[1]} ]]; then
+		exit 0
+	else
+		exit 2
+	fi
 }
+
 # setup flow
 # - Pull or clone the repo
 # - user is going to change permission on this shell file
@@ -70,5 +90,4 @@ function validateSourcingIsNeeded(){
 # - user is going to install all dependencies (just the basics)
 
 # start of script
-complete -F autoCompCommands ./initialPullSetUp.sh
 main
