@@ -2,22 +2,31 @@
 This repo has shellscripts + notes on stuff I use on my day to day life at work or at home.
 
 ## Table of content!
+
 #### ShellScripts
 - [adbMulti](/adbMulti)
 - [adbSingle](/adbSingle)
 - [dependencyManager](/dependencyManager)
 - [hockeyAppTool](/hockey)
 
-#### [CLI, Tools, Tips, & Tricks (for me to ref)](#cli-tools-tips--tricks)
+#### Installation instructions!
+
+#### [My TODOs!](#todo)
+
+#### [Bash CLI, Tools, Tips, & Tricks (for me to ref)](#cli-tools-tips--tricks)
 - [Homebrew](#homebrew)
 - [Android Platofrm Tools](#android-platform-tool)
 - [Apple Configurator (automation tools)](#apple-configuratorautomation-tools)
 - [markdown cheatsheet](#markdown-cheatsheet)
 - [Appium](#appium)
 
-#### [My TODOs!](#todo)
-
 ---
+
+## Installation
+
+
+
+
 
 ## CLI, Tools, Tips, & Tricks!
 

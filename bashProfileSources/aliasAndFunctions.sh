@@ -4,6 +4,7 @@
 
 # for quick modification to my alias, bash profile, exports
 alias modify_bash_profile="subl $HOME/.bash_profile"
+alias modify_bash_rc="subl $HOME/.bashrc"
 alias modify_alias_functions="subl $HOME/shellscripts/bashProfileSources/aliasAndFunctions.sh"
 alias modify_exports="subl $HOME/shellscripts/bashProfileSources/exportList.sh"
 
@@ -46,6 +47,7 @@ alias mtr="sudo mtr"
 alias adbSingle='$HOME/shellscripts/adbSingle/adbSingle.sh'
 alias convertVideoToGif="$HOME/shellscripts/externalScripts/videoToGif.sh"
 
+# this is something im using to hit whatever shellscript easier.
 alias initTest='$HOME/shellscripts/setUp/initialPullSetUp.sh'
 
 # mongodb shortcuts (commentted out since im not using)
