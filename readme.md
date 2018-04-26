@@ -45,6 +45,7 @@ depMan -i npm $HOME/shellscripts/dependencyManager/nodeJsonExample.json
 depMan -i brew $HOME/shellscripts/dependencyManager/brewJsonExample.json
 ```
 8. THIS IS WHERE I LEFT OFF NEED TO MAKE THE MARKDOWN LOOK CLEANER!
+test
 
 ---
 
