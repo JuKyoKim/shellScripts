@@ -27,7 +27,6 @@ This repo has shellscripts + notes on stuff I use on my day to day life at work 
 ### Pre-reqs
 - install latest version of Sublime text
 - set sublime text command to bin
-- THIS IS WHERE I LEFT OFF
 
 
 
