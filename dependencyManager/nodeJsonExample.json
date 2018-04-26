@@ -2,7 +2,7 @@
   "nodePackages": [
     {
       "name": "appium",
-      "version": "1.7.2"
+      "version": "1.8.0"
     },
     {
       "name": "appium-doctor",
@@ -14,11 +14,15 @@
     },
     {
       "name": "appium-xcuitest-driver",
-      "version": "2.76.2"
+      "version": "2.77.0"
     },
     {
       "name": "authorize-ios",
       "version": "1.0.5"
+    },
+    {
+      "name": "deviceconsole",
+      "version": "1.0.1"
     },
     {
       "name": "ios-deploy",
@@ -26,7 +30,7 @@
     },
     {
       "name": "json-server",
-      "version": "0.12.1"
+      "version": "0.12.2"
     },
     {
       "name": "nodemon",
@@ -34,7 +38,7 @@
     },
     {
       "name": "npm",
-      "version": "5.8.0"
+      "version": "5.6.0"
     },
     {
       "name": "tldr",

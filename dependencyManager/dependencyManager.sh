@@ -391,6 +391,7 @@ function generateNpmPackageList(){
 }
 
 function updateAllNpmPackages(){
+	npm install npm@latest -g
 	npm update -g
 }
 

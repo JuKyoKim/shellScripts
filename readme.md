@@ -22,12 +22,33 @@ This repo has shellscripts + notes on stuff I use on my day to day life at work 
 
 ---
 
-## Installation
+## Installation of scripts + other utilities
 
 ### Pre-reqs
-- install latest version of Sublime text
-- set sublime text command to bin
+- Install latest version of [Sublime Text](https://www.sublimetext.com/)
+- Create a [symlink for Sublime Text](https://olivierlacan.com/posts/launch-sublime-text-3-from-the-command-line/)
+- Install [JDK & JRE](https://docs.oracle.com/javase/9/install/installation-jdk-and-jre-macos.htm#JSJIG-GUID-2FE451B0-9572-4E38-A1A5-568B77B146DE)
 
+### Steps
+1. clone this repo to your home directory ('~' or '$HOME')
+2. change permission to make the initialPullSetUp.sh executable ```shell chmod +x ~/shellscripts/setUp/initialPullSetUp.sh```
+3. run the script (this script will write to your bash_profile the sourcing for aliases and exports needed for native app automation + java development)
+4. restart terminal (the shell script will tell you to anyways)
+5. in the new session check to see if it worked by typing 
+```shell 
+modify_bash_profile
+```
+IF this command opens sublime and your .bash_profile it means the first script ran worked as expected!
+6. in terminal type 
+```shell 
+depMan -c
+``` 
+(its the alias for my dependencyManager shell script. The -c option checks to see if homebrew and npm is installed. IF it doesn't find them it will auto install them)
+7. in terminal type these 2 commands
+```shell 
+	depMan -i npm $HOME/shellscripts/dependencyManager/nodeJsonExample.json
+	depMan -i brew $HOME/shellscripts/dependencyManager/brewJsonExample.json
+```
 
 
 ## CLI, Tools, Tips, & Tricks!
