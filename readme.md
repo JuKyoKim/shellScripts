@@ -31,13 +31,11 @@ This repo has shellscripts + notes on stuff I use on my day to day life at work 
 
 ### Steps
 1. clone this repo to your home directory ('~' or '$HOME')
-2. change permission to make the initialPullSetUp.sh executable ```shell chmod +x ~/shellscripts/setUp/initialPullSetUp.sh```
+2. change permission to make the initialPullSetUp.sh executable ``` chmod +x ~/shellscripts/setUp/initialPullSetUp.sh```
 3. run the script (this script will write to your bash_profile the sourcing for aliases and exports needed for native app automation + java development)
 4. restart terminal (the shell script will tell you to anyways)
 5. in the new session check to see if it worked by typing 
-```shell 
-modify_bash_profile
-```
+``` modify_bash_profile ```
 IF this command opens sublime and your .bash_profile it means the first script ran worked as expected!
 6. in terminal type 
 ```shell 
@@ -50,6 +48,7 @@ depMan -c
 	depMan -i brew $HOME/shellscripts/dependencyManager/brewJsonExample.json
 ```
 
+---
 
 ## CLI, Tools, Tips, & Tricks!
 
