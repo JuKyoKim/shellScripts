@@ -37,15 +37,12 @@ This repo has shellscripts + notes on stuff I use on my day to day life at work 
 5. in the new session check to see if it worked by typing 
 ``` modify_bash_profile ```
 IF this command opens sublime and your .bash_profile it means the first script ran worked as expected!
-6. in terminal type 
-```shell 
-depMan -c
-``` 
+6. in terminal type ``` depMan -c ``` 
 (its the alias for my dependencyManager shell script. The -c option checks to see if homebrew and npm is installed. IF it doesn't find them it will auto install them)
 7. in terminal type these 2 commands
 ```shell 
-	depMan -i npm $HOME/shellscripts/dependencyManager/nodeJsonExample.json
-	depMan -i brew $HOME/shellscripts/dependencyManager/brewJsonExample.json
+depMan -i npm $HOME/shellscripts/dependencyManager/nodeJsonExample.json
+depMan -i brew $HOME/shellscripts/dependencyManager/brewJsonExample.json
 ```
 
 ---
