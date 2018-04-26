@@ -44,6 +44,7 @@ IF this command opens sublime and your .bash_profile it means the first script r
 depMan -i npm $HOME/shellscripts/dependencyManager/nodeJsonExample.json
 depMan -i brew $HOME/shellscripts/dependencyManager/brewJsonExample.json
 ```
+8. THIS IS WHERE I LEFT OFF NEED TO MAKE THE MARKDOWN LOOK CLEANER!
 
 ---
 
