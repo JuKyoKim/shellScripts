@@ -1,5 +1,11 @@
-# ShellScript
-This repo has shellscripts + notes on stuff I use on my day to day life at work or at home. If you want to check them out just click on any of the links listed below.
+# Tom's bag of fun dev tools + tips/tricks!
+This repo contains shell scripts + quick notes on any tools + tips and tricks I use in my day to day.
+- the shell scripts are listed below so you can go straight to the files
+	- Each script should have a readme with install info + how to use
+- the tools + tips/tricks are listed below under the "Table of Content"
+	- Don't expect super detailed notes! I made it super simple for me to understand quickly.
+
+---
 
 ## ShellScripts
 - [adbMulti](/adbMulti)
