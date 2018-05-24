@@ -1,5 +1,5 @@
 # Tom's bag of fun dev tools + tips/tricks!
-This repo contains shell scripts + quick notes on any tools + tips and tricks I use in my day to day.
+This repo contains shell scripts + quick notes on any tools + tips/tricks I use in my day to day.
 - the shell scripts are listed below so you can go straight to the files
 	- Each script should have a readme with install info + how to use
 - the tools + tips/tricks are listed below under the "Table of Content"
