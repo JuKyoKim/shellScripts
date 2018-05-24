@@ -1,13 +1,13 @@
 # ShellScript
-This repo has shellscripts + notes on stuff I use on my day to day life at work or at home.
+This repo has shellscripts + notes on stuff I use on my day to day life at work or at home. If you want to check them out just click on any of the links listed below.
 
-## Table of content!
-
-#### ShellScripts
+## ShellScripts
 - [adbMulti](/adbMulti)
 - [adbSingle](/adbSingle)
 - [dependencyManager](/dependencyManager)
 - [hockeyAppTool](/hockey)
+
+## Table of content!
 
 #### Installation instructions!
 
@@ -45,7 +45,6 @@ depMan -i npm $HOME/shellscripts/dependencyManager/nodeJsonExample.json
 depMan -i brew $HOME/shellscripts/dependencyManager/brewJsonExample.json
 ```
 8. THIS IS WHERE I LEFT OFF NEED TO MAKE THE MARKDOWN LOOK CLEANER!
-test
 
 ---
 
