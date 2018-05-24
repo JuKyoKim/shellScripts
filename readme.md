@@ -7,6 +7,8 @@ This repo has shellscripts + notes on stuff I use on my day to day life at work 
 - [dependencyManager](/dependencyManager)
 - [hockeyAppTool](/hockey)
 
+---
+
 ## Table of content!
 
 #### Installation instructions!
