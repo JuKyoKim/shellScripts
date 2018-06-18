@@ -1,8 +1,8 @@
 # Tom's bag of fun dev tools + tips/tricks!
 This repo contains shell scripts + quick notes on any tools + tips/tricks I use in my day to day.
-* the shell scripts are listed below so you can go straight to the files
+* The shell scripts are listed below so you can go straight to the files
 	* Each script should have a readme with install info + how to use
-* the tools + tips/tricks are listed below under the "Table of Content"
+* The tools + tips/tricks are listed below under the "Table of Content"
 	* Don't expect super detailed notes! I made it super simple for me to understand quickly.
 
 
@@ -19,13 +19,13 @@ This repo contains shell scripts + quick notes on any tools + tips/tricks I use 
 ---
 
 
-## Table of content!
+## Table of Content!
 
-#### * [Installation instructions!](#installation-of-scripts--other-utilities)
+#### * [Installation Instructions!](#installation-of-scripts--other-utilities)
 
-#### * [My TODOs!](#todo)
+#### * [My ToDos!](#todo)
 
-#### * [Bash CLI, Tools, Tips, & Tricks (for me to ref)](#cli-tools-tips--tricks)
+#### * [Bash CLI, Tools, Tips, & Tricks](#cli-tools-tips--tricks)
 * [Homebrew](#homebrew)
 * [Android Platofrm Tools](#android-platform-tool)
 * [Apple Configurator (automation tools)](#apple-configuratorautomation-tools)
@@ -36,29 +36,52 @@ This repo contains shell scripts + quick notes on any tools + tips/tricks I use 
 ---
 
 
-## Installation of scripts + other utilities
+## Installation of Scripts + Other Utilities
 
-### Pre-reqs
+### Pre-Reqs
 * Install latest version of [Sublime Text](https://www.sublimetext.com/)
 * Create a [symlink for Sublime Text](https://olivierlacan.com/posts/launch-sublime-text-3-from-the-command-line/)
 * Install [JDK & JRE](https://docs.oracle.com/javase/9/install/installation-jdk-and-jre-macos.htm#JSJIG-GUID-2FE451B0-9572-4E38-A1A5-568B77B146DE)
 
+### What's being installed?
+By default these items are installed. You can always configure the JSON files in the ```/dependencyManager``` directory to not install certain items. Starred items are installed no matter what.
+* Homebrew *
+* Node.js *
+* Npm *
+* Android SDK
+* Android Platform Tools
+* Maven
+* Appium
+* Appium doctor
+* ios-deploy
+* nodemon
+* json-server
+
+
 ### Steps
-1. clone this repo to your home directory ('~' or '$HOME')
-2. change permission to make the initialPullSetUp.sh executable ``` chmod +x ~/shellscripts/setUp/initialPullSetUp.sh```
-3. run the script (this script will write to your bash_profile the sourcing for aliases and exports needed for native app automation + java development)
-4. restart terminal (the shell script will tell you to anyways)
-5. in the new session check to see if it worked by typing 
-``` modify_bash_profile ```
-IF this command opens sublime and your .bash_profile it means the first script ran worked as expected!
-6. in terminal type ``` depMan -c ``` 
-(its the alias for my dependencyManager shell script. The -c option checks to see if homebrew and npm is installed. IF it doesn't find them it will auto install them)
-7. in terminal type these 2 commands
-```shell 
-depMan -i npm $HOME/shellscripts/dependencyManager/nodeJsonExample.json
-depMan -i brew $HOME/shellscripts/dependencyManager/brewJsonExample.json
-```
-8. THIS IS WHERE I LEFT OFF NEED TO MAKE THE MARKDOWN LOOK CLEANER!
+1. Open Terminal
+2. Clone this repo to your home directory
+	* You can just type in terminal ```cd```, ```cd $HOME```, ```cd ~```
+3. Change permission to make the initialPullSetUp.sh executable 
+	* ```chmod +x ~/shellscripts/setUp/initialPullSetUp.sh```
+4. Exec the initialPullSetUp.sh script
+	* ```./$HOME/shellscripts/setUp/initialPullSetUp.sh```
+	* The script will source all the exports + aliases I use to your ```.bash_profile```
+	* Make sure to restart your terminal session after running the script
+		* In the new session check to see if it worked by typing 
+```modify_bash_profile```
+5. Exec the Dependency Manager script with the check option
+	* In terminal type ```depMan -c``` 
+	* This should auto install everything you need to run the other depMan options
+6. Exec the depMan script with install option
+	* In terminal type these 2 commands
+	```shell 
+	depMan -i npm $HOME/shellscripts/dependencyManager/nodeJsonExample.json
+	depMan -i brew $HOME/shellscripts/dependencyManager/brewJsonExample.json
+	```
+	* This should install the default packages for QA automation (stuff like appium, ios-deploy, carthage, etc....)
+7. Go to [git-prompt repo](https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh)
+8. Clone the shell script to your local machine
 
 
 ---
@@ -193,7 +216,5 @@ cfgutil get all
 	* update the script to be flexible to any app installed on current android/ios device?
 2. High Level README.md
 	* update this readme with every tool i've used + installation instructions
-3. initialPullSetUp.sh
-	* need to update with initial setup shell script readme
-	* need to make it more stable for brand new work machines
-	* need to test this one out more throughly with my personal machine
+	* capitalize correctly
+	* need to make sure android sdk + xcode installation steps are also included
