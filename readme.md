@@ -5,7 +5,9 @@ This repo contains shell scripts + quick notes on any tools + tips/tricks I use 
 - the tools + tips/tricks are listed below under the "Table of Content"
 	- Don't expect super detailed notes! I made it super simple for me to understand quickly.
 
+
 ---
+
 
 ## ShellScripts
 - [adbMulti](/adbMulti)
@@ -13,22 +15,26 @@ This repo contains shell scripts + quick notes on any tools + tips/tricks I use 
 - [dependencyManager](/dependencyManager)
 - [hockeyAppTool](/hockey)
 
+
 ---
+
 
 ## Table of content!
 
-#### Installation instructions!
+#### - [Installation instructions!](#installation-of-scripts--other-utilities)
 
-#### [My TODOs!](#todo)
+#### - [My TODOs!](#todo)
 
-#### [Bash CLI, Tools, Tips, & Tricks (for me to ref)](#cli-tools-tips--tricks)
-- [Homebrew](#homebrew)
-- [Android Platofrm Tools](#android-platform-tool)
-- [Apple Configurator (automation tools)](#apple-configuratorautomation-tools)
-- [markdown cheatsheet](#markdown-cheatsheet)
-- [Appium](#appium)
+#### - [Bash CLI, Tools, Tips, & Tricks (for me to ref)](#cli-tools-tips--tricks)
+..* [Homebrew](#homebrew)
+..* [Android Platofrm Tools](#android-platform-tool)
+..* [Apple Configurator (automation tools)](#apple-configuratorautomation-tools)
+..* [markdown cheatsheet](#markdown-cheatsheet)
+..* [Appium](#appium)
+
 
 ---
+
 
 ## Installation of scripts + other utilities
 
@@ -54,7 +60,9 @@ depMan -i brew $HOME/shellscripts/dependencyManager/brewJsonExample.json
 ```
 8. THIS IS WHERE I LEFT OFF NEED TO MAKE THE MARKDOWN LOOK CLEANER!
 
+
 ---
+
 
 ## CLI, Tools, Tips, & Tricks!
 
@@ -85,7 +93,9 @@ Command to uninstall Homebrew
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"
 ```
 
+
 ---
+
 
 ### [Android Platform tool](https://developer.android.com/studio/releases/platform-tools.html)
 
@@ -141,7 +151,9 @@ Command to clear app data
 adb shell pm clear {package name}
 ```
 
+
 ---
+
 
 ### [Apple configurator(automation tools)](https://itunes.apple.com/us/app/apple-configurator-2/id1037126344?mt=12)
 
@@ -160,21 +172,28 @@ Command to get all properties of connected device
 cfgutil get all
 ```
 
----
-
-### [MarkDown cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#hr)
 
 ---
+
+
+### [MarkDown cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+
+
+---
+
 
 ### [Appium](http://appium.io/)
 
+
 ---
 
+
 ## TODO
-1. update the deeplink shell script to be flexible to hit any app based on global array in bashrc or whatever is set in the app?
-2. source the test.sh file in bash_profile to make it easy to use
-3. move all references from bash_profile to a different file and just source that
-4. update this readme with any quick tips and tricks i find along the way (external shell scripts + other tools i've used in the past! Should check my stars for this information!) 
-5. need to update with initial setup shell script info
-6. need to update with all of the export list being sourced
-7. need to make sure installation instructions for all shell script recommends they do this in thier home directory (at least thats where its going to be set up if the run this shit!)
+1. Deeplink.sh
+⋅⋅* update the script to be flexible to any app installed on current android/ios device?
+2. High Level README.md
+..* update this readme with every tool i've used + installation instructions
+3. initialPullSetUp.sh
+..* need to update with initial setup shell script readme
+..* need to make it more stable for brand new work machines
+..* need to test this one out more throughly with my personal machine

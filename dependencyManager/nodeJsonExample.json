@@ -14,7 +14,7 @@
     },
     {
       "name": "appium-xcuitest-driver",
-      "version": "2.77.0"
+      "version": "2.79.3"
     },
     {
       "name": "authorize-ios",
@@ -34,15 +34,15 @@
     },
     {
       "name": "nodemon",
-      "version": "1.17.3"
+      "version": "1.17.4"
     },
     {
       "name": "npm",
-      "version": "5.6.0"
+      "version": "6.0.0"
     },
     {
       "name": "tldr",
-      "version": "3.2.1"
+      "version": "3.2.3"
     },
     {
       "name": "wd",
