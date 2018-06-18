@@ -1,19 +1,19 @@
 # Tom's bag of fun dev tools + tips/tricks!
 This repo contains shell scripts + quick notes on any tools + tips/tricks I use in my day to day.
-- the shell scripts are listed below so you can go straight to the files
-	- Each script should have a readme with install info + how to use
-- the tools + tips/tricks are listed below under the "Table of Content"
-	- Don't expect super detailed notes! I made it super simple for me to understand quickly.
+* the shell scripts are listed below so you can go straight to the files
+	* Each script should have a readme with install info + how to use
+* the tools + tips/tricks are listed below under the "Table of Content"
+	* Don't expect super detailed notes! I made it super simple for me to understand quickly.
 
 
 ---
 
 
 ## ShellScripts
-- [adbMulti](/adbMulti)
-- [adbSingle](/adbSingle)
-- [dependencyManager](/dependencyManager)
-- [hockeyAppTool](/hockey)
+* [adbMulti](/adbMulti)
+* [adbSingle](/adbSingle)
+* [dependencyManager](/dependencyManager)
+* [hockeyAppTool](/hockey)
 
 
 ---
@@ -21,16 +21,16 @@ This repo contains shell scripts + quick notes on any tools + tips/tricks I use 
 
 ## Table of content!
 
-#### - [Installation instructions!](#installation-of-scripts--other-utilities)
+#### * [Installation instructions!](#installation-of-scripts--other-utilities)
 
-#### - [My TODOs!](#todo)
+#### * [My TODOs!](#todo)
 
-#### - [Bash CLI, Tools, Tips, & Tricks (for me to ref)](#cli-tools-tips--tricks)
-** [Homebrew](#homebrew)
-⋅⋅* [Android Platofrm Tools](#android-platform-tool)
-⋅⋅* [Apple Configurator (automation tools)](#apple-configuratorautomation-tools)
-⋅⋅* [markdown cheatsheet](#markdown-cheatsheet)
-⋅⋅* [Appium](#appium)
+#### * [Bash CLI, Tools, Tips, & Tricks (for me to ref)](#cli-tools-tips--tricks)
+	* [Homebrew](#homebrew)
+	* [Android Platofrm Tools](#android-platform-tool)
+	* [Apple Configurator (automation tools)](#apple-configuratorautomation-tools)
+	* [markdown cheatsheet](#markdown-cheatsheet)
+	* [Appium](#appium)
 
 
 ---
@@ -39,9 +39,9 @@ This repo contains shell scripts + quick notes on any tools + tips/tricks I use 
 ## Installation of scripts + other utilities
 
 ### Pre-reqs
-- Install latest version of [Sublime Text](https://www.sublimetext.com/)
-- Create a [symlink for Sublime Text](https://olivierlacan.com/posts/launch-sublime-text-3-from-the-command-line/)
-- Install [JDK & JRE](https://docs.oracle.com/javase/9/install/installation-jdk-and-jre-macos.htm#JSJIG-GUID-2FE451B0-9572-4E38-A1A5-568B77B146DE)
+* Install latest version of [Sublime Text](https://www.sublimetext.com/)
+* Create a [symlink for Sublime Text](https://olivierlacan.com/posts/launch-sublime-text-3-from-the-command-line/)
+* Install [JDK & JRE](https://docs.oracle.com/javase/9/install/installation-jdk-and-jre-macos.htm#JSJIG-GUID-2FE451B0-9572-4E38-A1A5-568B77B146DE)
 
 ### Steps
 1. clone this repo to your home directory ('~' or '$HOME')
@@ -190,10 +190,10 @@ cfgutil get all
 
 ## TODO
 1. Deeplink.sh
-⋅⋅* update the script to be flexible to any app installed on current android/ios device?
+	* update the script to be flexible to any app installed on current android/ios device?
 2. High Level README.md
-⋅⋅* update this readme with every tool i've used + installation instructions
+	* update this readme with every tool i've used + installation instructions
 3. initialPullSetUp.sh
-⋅⋅* need to update with initial setup shell script readme
-⋅⋅* need to make it more stable for brand new work machines
-⋅⋅* need to test this one out more throughly with my personal machine
+	* need to update with initial setup shell script readme
+	* need to make it more stable for brand new work machines
+	* need to test this one out more throughly with my personal machine
