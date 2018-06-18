@@ -26,7 +26,7 @@ This repo contains shell scripts + quick notes on any tools + tips/tricks I use 
 #### - [My TODOs!](#todo)
 
 #### - [Bash CLI, Tools, Tips, & Tricks (for me to ref)](#cli-tools-tips--tricks)
-⋅⋅* [Homebrew](#homebrew)
+** [Homebrew](#homebrew)
 ⋅⋅* [Android Platofrm Tools](#android-platform-tool)
 ⋅⋅* [Apple Configurator (automation tools)](#apple-configuratorautomation-tools)
 ⋅⋅* [markdown cheatsheet](#markdown-cheatsheet)
