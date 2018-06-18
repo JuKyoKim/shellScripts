@@ -39,7 +39,7 @@ function sourceAliasAndExports(){
 		writeToFile "$(prePopulatedProfile $line)" $1
 		echo ""
 	# writing all sources from this specific pathing
-	done <<< "$(find $HOME/shellscripts/FunTimeRecords/bashProfileSources/* | grep .sh$)"
+	done <<< "$(find $HOME/shellscripts/bashProfileSources/* | grep .sh$)"
 }
 
 function validateSourcingIsNeeded(){

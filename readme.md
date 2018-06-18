@@ -95,7 +95,7 @@ By default these items are installed. You can always configure the JSON files in
 9. Follow the instructions in that shellscript
 10. Go to [video-to-gif repo](https://github.com/minimaxir/video-to-gif-osx)
 11. Download the shell script
-12. Go to ```/shellScripts/FunTimeRecords/bashProfileSources/aliasAndFunctions.sh``` and modify the ```alias convertVideoToGif=``` pathing to point to where the shell script currently lives
+12. Go to ```/shellScripts/bashProfileSources/aliasAndFunctions.sh``` and modify the ```alias convertVideoToGif=``` pathing to point to where the shell script currently lives
 13. Go to [MTR's main website](https://github.com/traviscross/mtr) and follow the installation instructions
 
 
