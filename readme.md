@@ -29,7 +29,7 @@ This repo contains shell scripts + quick notes on any tools + tips/tricks I use 
 * [Apple Configurator (Automation Tool)](#apple-configuratorautomation-tools)
 * [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
 * [Appium](http://appium.io/)
-* [Hosting a file on local IP/PORT](#ADD_LINK_HERE!)
+* [Hosting a file on local IP/PORT](#hosting-a-file-on-local-ipport!)
 * [Airflow (Chromecast/airplay content from Mac)](https://airflowapp.com/)
 * [Alfred (better version of spotlight)](https://www.alfredapp.com/)
 * [iTerm (better version of terminal)](https://www.iterm2.com/)
@@ -226,6 +226,6 @@ ruby -run -e httpd {path to file or directory} -p {4 digit PORT NUMBER}
 ## TODO
 1. Deeplink.sh
 	* update the script to be flexible to any app installed on current android/ios device?
-2. 
-3. update all README
+2. update all README
 	* need to update all other markdown to use standard formatting like this one
+3. maybe include a section on how i use charles?
