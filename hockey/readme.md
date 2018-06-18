@@ -23,18 +23,26 @@
 
 ## Executing the script (with examples)
 - To pull script's usage doc
-```hockey```
+```shell
+hockey
+```
 
 - To pull list of apps under hockey
-```hockey list```
+```shell
+hockey list
+```
 
  - pulls Android apps
  	- the platform is case sensitive!
-```hockey list Android```
+```shell
+hockey list Android
+```
 
 - pulls iOS apps
 	- the platform is case sensitive!
-```hockey list iOS``` 
+```shell
+hockey list iOS
+``` 
 
 - To pull list of specific apps version
 	- the platform is case sensitive!
