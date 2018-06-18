@@ -6,7 +6,7 @@
 
 ## Features!
 - On start it will display all devices that are currently connected to your machine.
--- If there is only one device connected it will automatically display adb commands as options.
+	- If there is only one device connected it will automatically display adb commands as options.
 - Easy to setup + only requires [Android platform tools](https://developer.android.com/studio/command-line/adb.html) to be installed.
 - Commands that output a file (screenrecord, screenshot, logs) will automatically throw them on desktop AND remove them from device (if needed).
 
@@ -22,9 +22,9 @@
 
 ## How to install the script!
 - Clone or download this script to whatever directory you want
-- Make the script executable with the **chmod +x**
+- Make the script executable with the ```chmod +x```
 > for style points create an alias in your bashrc or bash_profile that can run the command anywhere for ease of use
-> I personally have this added in my bash profile **alias adbSingle='~/shellscripts/adbSingle.sh'**
+> I personally have this added in my bash profile ```alias adbSingle='~/shellscripts/adbSingle.sh'```
 
 ## How you can customize the shell script to your needs - Adding additional commands!
 1. Under the OPTIONS array add the command you want to enter.

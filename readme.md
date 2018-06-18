@@ -226,6 +226,4 @@ ruby -run -e httpd {path to file or directory} -p {4 digit PORT NUMBER}
 ## TODO
 1. Deeplink.sh
 	* update the script to be flexible to any app installed on current android/ios device?
-2. update all README
-	* need to update all other markdown to use standard formatting like this one
-3. maybe include a section on how i use charles?
+2. maybe include a section on how i use charles?
