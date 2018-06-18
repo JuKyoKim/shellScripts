@@ -17,9 +17,9 @@
 
 ## How to use
 - Clone or download this script to whatever directory you want
-- Make the script executable with the **chmod +x**
+- Make the script executable with the ```chmod +x```
 > for style points create an alias in your bashrc or bash_profile that can run the command anywhere for ease of use
-> I personally have this added in my bash profile **alias depMan='~/shellscripts/dependencyManager.sh'**
+> I personally have this added in my bash profile ```alias depMan='~/shellscripts/dependencyManager.sh'```
 
 ## upcoming features 
 - auto detect the JSON file using something like grep instead of a regex looking for .json
@@ -34,7 +34,7 @@
 - npm auto installs to version specific (this was due to problems i was running in to with appium!)
 - atm the commands are invoked by quick conditional checks, so will change this to a case statement with custom conditionals to make adding new commands easier
 - create a function that will increment version
--- the version will be recorded inside either this markdown or in the shell script as a global var
+	- the version will be recorded inside either this markdown or in the shell script as a global var
 
 ## Examples on how to run the command
 - to invoke the usage information
