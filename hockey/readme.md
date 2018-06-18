@@ -13,8 +13,8 @@
 ## How to install the script
 - Clone or download this script to whatever directory you want
 - Make the script executable with the ```chmod +x```
-> for style points create an alias in your bashrc or bash_profile that can run the command anywhere for ease of use
-> Personally I made an alias called hockey to run the script from anywhere
+> For style points create an alias in your bashrc or bash_profile that can run the command anywhere for ease of use.
+> Personally I made an alias called hockey to run the script from anywhere.
 > ```alias hockey="~/hockeyCLTool.sh"```
 - Install JQ on your dev machine - [JQ download](https://stedolan.github.io/jq/download/)
 - Setup an ENV variable in your bashrc or bash_profile called HOCKEYTOKEN
