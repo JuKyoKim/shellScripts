@@ -48,7 +48,7 @@ alias adbSingle='$HOME/shellscripts/adbSingle/adbSingle.sh'
 alias convertVideoToGif="$HOME/shellscripts/externalScripts/videoToGif.sh"
 
 # this is something im using to hit whatever shellscript easier.
-alias initTest='$HOME/shellscripts/setUp/initialPullSetUp.sh'
+alias initTest='$HOME/shellscripts/toDoScripts/test.sh'
 
 # mongodb shortcuts (commentted out since im not using)
 # alias start_mongo="mongod"
