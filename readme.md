@@ -26,11 +26,11 @@ This repo contains shell scripts + quick notes on any tools + tips/tricks I use 
 #### - [My TODOs!](#todo)
 
 #### - [Bash CLI, Tools, Tips, & Tricks (for me to ref)](#cli-tools-tips--tricks)
-..* [Homebrew](#homebrew)
-..* [Android Platofrm Tools](#android-platform-tool)
-..* [Apple Configurator (automation tools)](#apple-configuratorautomation-tools)
-..* [markdown cheatsheet](#markdown-cheatsheet)
-..* [Appium](#appium)
+⋅⋅* [Homebrew](#homebrew)
+⋅⋅* [Android Platofrm Tools](#android-platform-tool)
+⋅⋅* [Apple Configurator (automation tools)](#apple-configuratorautomation-tools)
+⋅⋅* [markdown cheatsheet](#markdown-cheatsheet)
+⋅⋅* [Appium](#appium)
 
 
 ---
@@ -192,8 +192,8 @@ cfgutil get all
 1. Deeplink.sh
 ⋅⋅* update the script to be flexible to any app installed on current android/ios device?
 2. High Level README.md
-..* update this readme with every tool i've used + installation instructions
+⋅⋅* update this readme with every tool i've used + installation instructions
 3. initialPullSetUp.sh
-..* need to update with initial setup shell script readme
-..* need to make it more stable for brand new work machines
-..* need to test this one out more throughly with my personal machine
+⋅⋅* need to update with initial setup shell script readme
+⋅⋅* need to make it more stable for brand new work machines
+⋅⋅* need to test this one out more throughly with my personal machine
