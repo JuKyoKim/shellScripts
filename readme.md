@@ -23,14 +23,23 @@ This repo contains shell scripts + quick notes on any tools + tips/tricks I use 
 
 #### * [Installation Instructions!](#installation-of-scripts--other-utilities)
 
-#### * [My ToDos!](#todo)
-
 #### * [Bash CLI, Tools, Tips, & Tricks](#cli-tools-tips--tricks)
 * [Homebrew](#homebrew)
 * [Android Platofrm Tools](#android-platform-tool)
-* [Apple Configurator (automation tools)](#apple-configuratorautomation-tools)
-* [markdown cheatsheet](#markdown-cheatsheet)
-* [Appium](#appium)
+* [Apple Configurator (Automation Tool)](#apple-configuratorautomation-tools)
+* [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+* [Appium](http://appium.io/)
+* [Hosting a file on local IP/PORT](#ADD_LINK_HERE!)
+* [Airflow (Chromecast/airplay content from Mac)](https://airflowapp.com/)
+* [Alfred (better version of spotlight)](https://www.alfredapp.com/)
+* [iTerm (better version of terminal)](https://www.iterm2.com/)
+* [Docker](https://www.docker.com/)
+* [Charles](https://www.charlesproxy.com/)
+* [Spectacle (windows management tool)](https://www.spectacleapp.com/)
+* [Postman (rest api)](https://www.getpostman.com/)
+* [vysor (control android from desktop)](https://www.vysor.io/)
+
+#### * [My ToDos!](#todo)
 
 
 ---
@@ -48,6 +57,7 @@ By default these items are installed. You can always configure the JSON files in
 * Homebrew *
 * Node.js *
 * Npm *
+* Apple Configurator
 * Android SDK
 * Android Platform Tools
 * Maven
@@ -58,7 +68,7 @@ By default these items are installed. You can always configure the JSON files in
 * json-server
 
 
-### Steps
+### Steps for Full installation
 1. Open Terminal
 2. Clone this repo to your home directory
 	* You can just type in terminal ```cd```, ```cd $HOME```, ```cd ~```
@@ -81,7 +91,12 @@ By default these items are installed. You can always configure the JSON files in
 	```
 	* This should install the default packages for QA automation (stuff like appium, ios-deploy, carthage, etc....)
 7. Go to [git-prompt repo](https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh)
-8. Clone the shell script to your local machine
+8. Clone the git-prompt.sh shell script to your local machine
+9. Follow the instructions in that shellscript
+10. Go to [video-to-gif repo](https://github.com/minimaxir/video-to-gif-osx)
+11. Download the shell script
+12. Go to ```/shellScripts/FunTimeRecords/bashProfileSources/aliasAndFunctions.sh``` and modify the ```alias convertVideoToGif=``` pathing to point to where the shell script currently lives
+13. Go to [MTR's main website](https://github.com/traviscross/mtr) and follow the installation instructions
 
 
 ---
@@ -97,17 +112,17 @@ Command to install homebrew
 ```
 
 Command to update all casks and homebrew
-```bash
+```shell
 brew update
 ```
 
 Command to upgrade everything
-```bash
+```shell
 brew upgrade 
 ```
 
 Command to find where stuff gets downloaded
-```bash
+```shell
 brew --cache
 ```
 
@@ -174,7 +189,6 @@ Command to clear app data
 adb shell pm clear {package name}
 ```
 
-
 ---
 
 
@@ -195,17 +209,15 @@ Command to get all properties of connected device
 cfgutil get all
 ```
 
-
 ---
 
 
-### [MarkDown cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+### [Hosting a file on local IP/PORT](http://www.benjaminoakes.com/2013/09/13/ruby-simple-http-server-minimalist-rake/)
 
-
----
-
-
-### [Appium](http://appium.io/)
+Command to host file/s
+```shell
+ruby -run -e httpd {path to file or directory} -p {4 digit PORT NUMBER}
+```
 
 
 ---
@@ -214,7 +226,6 @@ cfgutil get all
 ## TODO
 1. Deeplink.sh
 	* update the script to be flexible to any app installed on current android/ios device?
-2. High Level README.md
-	* update this readme with every tool i've used + installation instructions
-	* capitalize correctly
-	* need to make sure android sdk + xcode installation steps are also included
+2. 
+3. update all README
+	* need to update all other markdown to use standard formatting like this one
