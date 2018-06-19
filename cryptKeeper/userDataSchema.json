@@ -12,7 +12,7 @@
 			"notes":"string_notes"
 		},
 		{
-			"service":"string_service_name",
+			"service":"string_service",
 			"username":"string_username",
 			"password":"string_password_case_sensitive",
 			"notes":"string_notes"

@@ -1,0 +1,14 @@
+{
+	"history_of_user_interactions":[
+		{
+			"date":"date_string",
+			"checksum":"SHA_key_string",
+			"valid_transaction": true
+		},
+		{
+			"date":"date_string",
+			"checksum":"SHA_key_string",
+			"valid_transaction": false
+		}
+	]
+}
