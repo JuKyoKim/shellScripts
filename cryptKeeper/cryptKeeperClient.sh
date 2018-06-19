@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # ===== GLOBAL_VAR ===== #
 
 DEFAULT_HASH_BIT_RATE=256
@@ -51,9 +52,8 @@ function login(){
 	clearTerminalSession
 	read -e -p "Enter server address:" server_address
 	read -e -p "Enter port number:" port_number
-	echo "$server_address:$port_number"
-
-
+	read -e -p "Enter passphrase:" server_passphrase
+	ssh $server_address -p $port_number
 }
 
 

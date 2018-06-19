@@ -20,3 +20,13 @@ server side responsibility
 =========
 - validate with RSA key
 - CRUD create, read, update, delete but only specific files users pushes up
+
+<!-- Need to find out how to create dynamic DNS to easily hit it from work/outside home network -->
+<!-- https://lifehacker.com/205090/geek-to-live--set-up-a-personal-home-ssh-server
+https://lifehacker.com/124212/geek-to-live--how-to-set-up-a-personal-home-web-server -->
+
+cryptKeeperClient shell script will start the login flow
+expectedBot will enter the passwords? once it spawns?
+
+boJ9jbbUNNfktd78OOpsqOltutMc3MY1
+ssh bandit1@bandit.labs.overthewire.org -p 2220
