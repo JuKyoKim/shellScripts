@@ -30,3 +30,6 @@ expectedBot will enter the passwords? once it spawns?
 
 boJ9jbbUNNfktd78OOpsqOltutMc3MY1
 ssh bandit1@bandit.labs.overthewire.org -p 2220
+
+https://stackoverflow.com/questions/7729948/expect-script-issue
+https://gist.github.com/Fluidbyte/6294378
