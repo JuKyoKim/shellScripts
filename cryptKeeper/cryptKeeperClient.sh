@@ -3,6 +3,8 @@
 
 DEFAULT_HASH_BIT_RATE=256
 
+
+
 # ===== UTILITY ===== #
 
 function clearTerminalSession(){
@@ -32,20 +34,35 @@ function validateHashKey(){
 }
 
 function base64Encode(){
-	#ARGUMENT 1 = PATH TO FILE
-	openssl base64 -in $1
+	#ARGUMENT 1 = PATH TO FILE or pipe in String?
+	base64 $1
 }
 
 function base64Decode(){
-	echo "$1" | openssl enc -base64 -d
+	#ARGUMENT 1 = encoded b64 string
+	echo "$1" | base64 --decode
 }
+
+function login(){
+	# need to kickup ssh server
+	# ask for address and port
+	# auto connect based on RSA KEY
+	# if the RSA key does not exist throw error and exit
+	clearTerminalSession
+	read -e -p "Enter server address:" server_address
+	read -e -p "Enter port number:" port_number
+	echo "$server_address:$port_number"
+
+
+}
+
+
 
 # ===== MAIN ===== #
 
 function main(){
-	test="$(base64Encode $1)"
-	base64Decode test
+	login
 }
 
 #START OF PROGRAM!
-main $1
+main
