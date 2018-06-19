@@ -1,0 +1,21 @@
+{
+	"account_holder":"string_username",
+	"account_secret_key":"string_key_hashed",
+	"account_nickname":"string_nickname",
+	"security_question":"string_question",
+	"user_accounts":[
+		{
+			"service":"string_service_name",
+			"username":"string_username",
+			"password":"string_password_case_sensitive",
+			"pin":"string_null",
+			"notes":"string_notes"
+		},
+		{
+			"service":"string_service_name",
+			"username":"string_username",
+			"password":"string_password_case_sensitive",
+			"notes":"string_notes"
+		}
+	]
+}
