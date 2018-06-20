@@ -1,0 +1,6 @@
+~ ALL OTHER LINES WILL BE IGNORED! ~
+service: testservicename
+username: testasdfasdf
+password: testasfdasfd
+notes: testasdf
+~ ATM we only support 1 account added per run ~

@@ -19,7 +19,21 @@ function getUserOption(){
 			$HOME/shellscripts/cryptKeeper/utilityShell/login.sh
 		;;
 
-		
+		"create" )
+			echo "create"
+		;;
+
+		"read" )
+			echo "read"
+		;;
+
+		"update" )
+			echo "update"
+		;;
+
+		"delete" )
+			echo "delete"
+		;;
 
 		* )
 			printGenericError
