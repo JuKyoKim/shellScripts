@@ -4,13 +4,7 @@
 
 DEFAULT_HASH_BIT_RATE=256
 
-
-
-# ===== UTILITY ===== #
-
-function clearTerminalSession(){
-	osascript -e 'tell application "System Events" to tell process "Terminal" to keystroke "k" using command down'
-}
+# ===== FUNCTIONS ===== #
 
 function hashString(){
 	# ARGUMENT 1 = THE STRING TO BE HASHED!
@@ -43,26 +37,3 @@ function base64Decode(){
 	#ARGUMENT 1 = encoded b64 string
 	echo "$1" | base64 --decode
 }
-
-function login(){
-	# need to kickup ssh server
-	# ask for address and port
-	# auto connect based on RSA KEY
-	# if the RSA key does not exist throw error and exit
-	clearTerminalSession
-	read -e -p "Enter server address:" server_address
-	read -e -p "Enter port number:" port_number
-	read -e -p "Enter passphrase:" server_passphrase
-	ssh $server_address -p $port_number
-}
-
-
-
-# ===== MAIN ===== #
-
-function main(){
-	login
-}
-
-#START OF PROGRAM!
-main

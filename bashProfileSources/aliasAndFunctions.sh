@@ -47,9 +47,6 @@ alias mtr="sudo mtr"
 alias adbSingle='$HOME/shellscripts/adbSingle/adbSingle.sh'
 alias convertVideoToGif="$HOME/shellscripts/externalScripts/videoToGif.sh"
 
-# this is something im using to hit whatever shellscript easier.
-alias initTest='$HOME/shellscripts/cryptKeeper/cryptKeeperClient.sh'
-
 # mongodb shortcuts (commentted out since im not using)
 # alias start_mongo="mongod"
 # alias connect_mongo="mongo"
