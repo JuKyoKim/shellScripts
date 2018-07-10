@@ -90,9 +90,11 @@ By default these items are installed. You can always configure the JSON files in
 	depMan -i brew $HOME/shellscripts/dependencyManager/brewJsonExample.json
 	```
 	* This should install the default packages for QA automation (stuff like appium, ios-deploy, carthage, etc....)
-7. Go to [git-prompt repo](https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh)
-8. Clone the git-prompt.sh shell script to your local machine
-9. Follow the instructions in that shellscript
+7. Go to [git-prompt repo](https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh)
+8. Clone the git-prompt.sh shell script to your local machine. Using ```wget``` might be easier then manually downloading.
+   * MAKE SURE THE FILE PATH IS FOR THE RAW FILE OR YOU ARE GOING TO GRAB THE ENTIRE HTML
+    ```wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh```
+9. Follow the instructions in the git-prompt shellscript to source to bash sessions
 10. Go to [video-to-gif repo](https://github.com/minimaxir/video-to-gif-osx)
 11. Download the shell script
 12. Go to ```/shellScripts/bashProfileSources/aliasAndFunctions.sh``` and modify the ```alias convertVideoToGif=``` pathing to point to where the shell script currently lives

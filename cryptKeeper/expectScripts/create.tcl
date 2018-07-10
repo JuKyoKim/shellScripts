@@ -1,7 +1,7 @@
 #!/usr/bin/expect -f
 
 # set timeout for each input to be within 3 seconds
-set timeout 1
+set timeout 60
 
 spawn ssh [lindex $argv 0] -p [lindex $argv 1]
 expect {
@@ -10,6 +10,11 @@ expect {
 		expect "bandit1@bandit.labs.overthewire.org's password:" {
 			send [lindex $argv 2]
 			send "\r"
+			sleep 2
+			
+			send "ls -a"
+			send "echo 'reached inside the bubble!'"
+			
 		}
 	}
 
@@ -19,4 +24,8 @@ expect {
 	}
 }
 
+expect "bandit1@bandit:~$" {
+	send "ls -a"
+	send "echo 'reached inside the bubble!'"
+}
 interact

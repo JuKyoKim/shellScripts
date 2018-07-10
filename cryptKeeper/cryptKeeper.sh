@@ -20,7 +20,7 @@ function getUserOption(){
 		;;
 
 		"create" )
-			echo "create"
+			$HOME/shellscripts/cryptKeeper/utilityShell/create.sh
 		;;
 
 		"read" )

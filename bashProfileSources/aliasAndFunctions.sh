@@ -46,6 +46,7 @@ alias depMan="$HOME/shellscripts/dependencyManager/dependencyManager.sh"
 alias mtr="sudo mtr"
 alias adbSingle='$HOME/shellscripts/adbSingle/adbSingle.sh'
 alias convertVideoToGif="$HOME/shellscripts/externalScripts/videoToGif.sh"
+alias crypter="$HOME/shellscripts/cryptKeeper/cryptKeeper.sh"
 
 # mongodb shortcuts (commentted out since im not using)
 # alias start_mongo="mongod"
