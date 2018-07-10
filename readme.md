@@ -38,6 +38,7 @@ This repo contains shell scripts + quick notes on any tools + tips/tricks I use 
 * [Spectacle (windows management tool)](https://www.spectacleapp.com/)
 * [Postman (rest api)](https://www.getpostman.com/)
 * [vysor (control android from desktop)](https://www.vysor.io/)
+* [selenium-grid extras](https://github.com/groupon/Selenium-Grid-Extras)
 
 #### * [My ToDos!](#todo)
 
@@ -234,3 +235,4 @@ ruby -run -e httpd {path to file or directory} -p {4 digit PORT NUMBER}
 1. Deeplink.sh
 	* update the script to be flexible to any app installed on current android/ios device?
 2. maybe include a section on how i use charles?
+3. include steps for installing selenium-grid after using it a bit. its just a java application.
