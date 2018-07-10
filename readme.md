@@ -128,6 +128,11 @@ Command to find where stuff gets downloaded
 brew --cache
 ```
 
+Command to check homebrew status
+```shell
+brew doctor
+```
+
 Command to uninstall Homebrew
 ```ruby
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"
