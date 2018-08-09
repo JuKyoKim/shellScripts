@@ -13,8 +13,12 @@
       "version": "1.25.0"
     },
     {
+      "name": "appium-uiautomator2-driver",
+      "version": "0.0.7"
+    },
+    {
       "name": "appium-xcuitest-driver",
-      "version": "2.79.3"
+      "version": "2.87.0"
     },
     {
       "name": "authorize-ios",
@@ -34,11 +38,15 @@
     },
     {
       "name": "nodemon",
-      "version": "1.17.4"
+      "version": "1.18.3"
     },
     {
       "name": "npm",
-      "version": "6.1.0"
+      "version": "6.2.0"
+    },
+    {
+      "name": "selenium-webdriver",
+      "version": "4.0.0-alpha.1"
     },
     {
       "name": "tldr",
@@ -46,7 +54,7 @@
     },
     {
       "name": "wd",
-      "version": "1.6.2"
+      "version": "1.10.1"
     }
   ]
 }

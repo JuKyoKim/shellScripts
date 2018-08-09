@@ -7,7 +7,7 @@ alias modify_bash_profile="subl $HOME/.bash_profile"
 alias modify_bash_rc="subl $HOME/.bashrc"
 alias modify_alias_functions="subl $HOME/shellscripts/bashProfileSources/aliasAndFunctions.sh"
 alias modify_exports="subl $HOME/shellscripts/bashProfileSources/exportList.sh"
-
+alias runWTF='make -C $HOME/go/src/github.com/senorprogrammer/wtf/ run'
 # airportCard control shortcut
 alias network_device='networksetup -listallhardwareports'
 alias turn_wifi_off='networksetup -setairportpower airport off'
