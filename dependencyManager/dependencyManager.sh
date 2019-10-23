@@ -30,18 +30,36 @@ function clear_quotes(){
 }
 
 # Something to make my code leaner? for now im going to leave this here
-function checkDepManInstalled(){
+function checkDepExist(){
 	# - Param 1 should accept the dependency name
 	# - Param 2 should accept the expected path it should appear
 	# Print false or true depending on if something was correctly returned?
-
+	
+	returningVal=
 	whichDependencyOutput="$(which $1)"
+	
 	# if the path doesn't match the second param
 	if [[ "$whichDependencyOutput" != "$2" ]]; then
-		echo false
+		
+		if [[ "$1" == "npm" ]]; then
+
+			# need to figure out why echoing the value here seems to be setting it?
+			nvmCheckVal="$(validateNullData 1 $1)"
+			echo "$nvmCheckVal"
+
+			if [[ "$nvmCheckVal" != 1 ]]; then
+				returningVal=true
+			else
+				returningVal=false
+			fi
+		fi
+		returningVal=false
 	else
-		echo true
+		returningVal=true
 	fi
+
+	# returns or more like echos the value back
+	echo "$returningVal"
 }
 
 function clearCurrentTerminalSession(){
@@ -192,11 +210,11 @@ function errorMessage(){
 
 function installScriptDep(){
 	# check to make sure all packages are installed before running script
-	if [[ "$(checkDepManInstalled brew "/usr/local/bin/brew")" == false ]]; then
+	if [[ "$(checkDepExist brew "/usr/local/bin/brew")" == false ]]; then
 		checkHomeBrewInstalled
 	fi
 
-	if [[ "$(checkDepManInstalled npm "/usr/local/bin/npm")" == false ]]; then
+	if [[ "$(checkDepExist npm "/usr/local/bin/npm")" == false ]]; then
 		checkNpmAndNodeIsInstalled
 	fi
 
@@ -212,7 +230,7 @@ function installScriptDep(){
 function checkHomeBrewInstalled(){
 	# check to see if which brew outputs the correct install location
 	
-	brewInstalled="$(checkDepManInstalled brew "/usr/local/bin/brew")"
+	brewInstalled="$(checkDepExist brew "/usr/local/bin/brew")"
 	if [[ $brewInstalled == false ]]; then
 		cd $HOME
 		/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -336,7 +354,7 @@ function nodeJsonOutPut(){
 }
 
 function checkNpmAndNodeIsInstalled(){
-	nodeInstalled="$(checkDepManInstalled node "/usr/local/bin/node")"
+	nodeInstalled="$(checkDepExist node "/usr/local/bin/node")"
 	if [[ $nodeInstall == false ]]; then
 		echo "node was not found. Running the install latest command"
 		cd $HOME
@@ -347,7 +365,7 @@ function checkNpmAndNodeIsInstalled(){
 
 	fi
 
-	npmInstalled="$(checkDepManInstalled npm "/usr/local/bin/npm")"
+	npmInstalled="$(checkDepExist npm "/usr/local/bin/npm")"
 	if [[ $npmInstalled == false ]]; then
 		echo "npm was not found. Running the install latest NPM version"
 		cd $HOME
