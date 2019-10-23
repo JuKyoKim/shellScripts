@@ -3,7 +3,7 @@
 ARRAY_OF_BREW_PACKAGE=()
 ARRAY_OF_NPM_PACKAGE=()
 readonly PROGNAME=$(basename $0)
-readonly VERSION="1.0.0"
+readonly VERSION="1.0.1"
 readonly ARRAY_OF_DEP_MANAGE=( "npm" "brew" )
 readonly ARRAY_OF_COMMAND=("-c" "-g" "-i" "-u" "-v")
 # ===========Generic Utility===========
