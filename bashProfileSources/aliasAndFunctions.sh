@@ -3,10 +3,10 @@
 #LIST OF ALIAS
 
 # for quick modification to my alias, bash profile, exports
-alias modify_bash_profile="subl $HOME/.bash_profile"
-alias modify_bash_rc="subl $HOME/.bashrc"
-alias modify_alias_functions="subl $HOME/shellscripts/bashProfileSources/aliasAndFunctions.sh"
-alias modify_exports="subl $HOME/shellscripts/bashProfileSources/exportList.sh"
+alias modify_bash_profile="code $HOME/.bash_profile"
+alias modify_bash_rc="code $HOME/.bashrc"
+alias modify_alias_functions="code $HOME/shellscripts/bashProfileSources/aliasAndFunctions.sh"
+alias modify_exports="code $HOME/shellscripts/bashProfileSources/exportList.sh"
 alias runWTF='make -C $HOME/go/src/github.com/senorprogrammer/wtf/ run'
 # airportCard control shortcut
 alias network_device='networksetup -listallhardwareports'
@@ -19,7 +19,7 @@ alias turn_wifi_on='networksetup -setairportpower airport on'
 alias findCommandPath="type -a"
 alias deleteDownloads="rm -ri $HOME/Downloads/*"
 #alias for opening another charles session
-alias charles="open -na charles"
+alias charlesNAOpen="open -na charles"
 # to own the file (allow me to modify/execute)
 alias permission="chmod +x "
 # making ccat to cat
@@ -45,12 +45,45 @@ alias hockey='$HOME/shellscripts/hockey/hockeyCLTool.sh'
 alias depMan="$HOME/shellscripts/dependencyManager/dependencyManager.sh"
 alias mtr="sudo mtr"
 alias adbSingle='$HOME/shellscripts/adbSingle/adbSingle.sh'
-alias convertVideoToGif="$HOME/shellscripts/externalScripts/videoToGif.sh"
+alias convertVideoToGif="$HOME/shellscripts/external/video_to_gif_osx.sh"
 alias crypter="$HOME/shellscripts/cryptKeeper/cryptKeeper.sh"
+
+function decodebase64 (){
+	echo "$1" | base64 --decode > ~/Desktop/decode.txt ; code ~/Desktop/decode.txt
+	# open text file piping this data back
+}
 
 # mongodb shortcuts (commentted out since im not using)
 # alias start_mongo="mongod"
 # alias connect_mongo="mongo"
+
+
+# kinesis command line functions
+function runKinesisTest(){
+	node ~/dev/charles_session_parser/kinesisrecords.js
+}
+
+function parseKinesisLogs(){
+	Charles convert ~/Downloads/session.chls ~/Downloads/session.chlsj
+	node ~/dev/charles_session_parser/kinesisrecords.js > ~/Desktop/kinesisFormatted.txt
+	subl ~/Desktop/kinesisFormatted.txt
+	mv ~/Downloads/session.* ~/Desktop/charles_logs/
+}
+
+function wipeKinesisData(){
+	rm -rf ~/Desktop/charles_logs/*.*
+	rm -rf ~/Desktop/kinesisFormatted.txt
+}
+
+# epoch time conversion
+function epochConvert(){
+	date -r "$(($1/1000))"
+}
+
+function consent_string_decode(){
+	node /Users/tomkim/dev/daisybit/main.js "$1" "$2"
+}
+
 
 # running fuck on the last command - https://github.com/nvbn/thefuck
 eval $(thefuck --alias fuck)

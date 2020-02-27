@@ -34,3 +34,7 @@ export APPIUM_SETTING="io.appium.settings"
 # java EXPORTS
 export JAVA_HOME=$(/usr/libexec/java_home)
 export PATH=${JAVA_HOME}/bin:$PATH
+
+# charles exports for using charles command line
+export CHARLES_HOME=/Applications/Charles.app/Contents/MacOS
+export PATH=$PATH:$CHARLES_HOME
